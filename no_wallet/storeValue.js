@@ -2,11 +2,10 @@ const Tx = require('ethereumjs-tx').Transaction;
 const Web3 = require('web3');
 const web3 = new Web3('http://127.0.0.1:7545');
 
-const account1 = '0xd7B61E052bacbb0CE0b9F8E932C2362574cFEf7C'; 
+const accountFrom = ''; 
+const privateKeyFrom = Buffer.from("", 'hex');
+const contractAddress = "";
 
-const privateKey1 = Buffer.from("5e00da209def84dbbe55566afe65a00d4e8408e4a2cc8a94a66dc47d54f52ccc", 'hex');
-
-const contractAddress = "0x3a9b23a228559D6ba7C17f70A0a5296D02d43DCe";
 const abi =[
 	{
 		"constant": false,
@@ -48,7 +47,7 @@ const abi =[
 const contract = new web3.eth.Contract(abi, contractAddress);
 var newValue = "Just another new message";
 
-web3.eth.getTransactionCount(account1, (err, txCount) => {
+web3.eth.getTransactionCount(accountFrom, (err, txCount) => {
 
   const txObject = {
     nonce:    web3.utils.toHex(txCount),
@@ -59,7 +58,7 @@ web3.eth.getTransactionCount(account1, (err, txCount) => {
   };
 
   const tx = new Tx(txObject);
-  tx.sign(privateKey1);
+  tx.sign(privateKeyFrom);
 
   const serializedTx = tx.serialize();
   const raw = '0x' + serializedTx.toString('hex');
