@@ -16,10 +16,6 @@ rl.question('Ethereum Provider URL: ', (URL)=>{
                 userAddress     = address;
                 userPrivateKey  = privatekey;
                 contractAddress = contract; 
-                console.log(providerURL);
-                console.log(userAddress);
-                console.log(userPrivateKey);
-                console.log(contractAddress);
                 rl.close();
             });
         });
