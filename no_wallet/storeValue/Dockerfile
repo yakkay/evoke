@@ -1,6 +1,6 @@
-FROM node:10
+FROM node:10.16.3
 
-WORKDIR /home/yakkay/evoke/no_wallet/storeValue
+ADD storeValue.js ./
 
 COPY package*.json ./
 

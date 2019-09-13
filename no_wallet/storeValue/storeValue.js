@@ -53,35 +53,40 @@ rl.question('Ethereum Provider URL: ', (URL)=>{
     rl.question('User address: ', (uAddress)=>{
         rl.question('User private key: ',(privatekey)=>{
             rl.question('contract address: ',(cAddress)=>{
-				rl.question('new value: ',(newValue)=>{
-					const web3 = new Web3(URL);
-					const contract = new web3.eth.Contract(abi, cAddress);	
-					contract.methods.getValue().call((err, Value) => {
-						console.log("The stored value is: "+Value);
-					  });
-					web3.eth.getBalance(uAddress,(err,wei)=>{
-						console.log("User balance = "+web3.utils.fromWei(wei,'ether')+" Ether");
-					});
-					web3.eth.getTransactionCount(uAddress, (err, txCount) => {
-						const txObject = {
-						  nonce:    web3.utils.toHex(txCount),
-						  gasLimit: web3.utils.toHex(800000), 
-						  gasPrice: web3.utils.toHex(web3.utils.toWei('10', 'gwei')),
-						  to: cAddress,
-						  data: contract.methods.setValue(newValue).encodeABI()
-						};
-						const tx = new Tx(txObject);
-						tx.sign(Buffer.from(privatekey,'hex'));
-						const serializedTx = tx.serialize();
-						const raw = '0x' + serializedTx.toString('hex');
-						web3.eth.sendSignedTransaction(raw, (err, txHash) => {
-						  console.log('Success on txHash:'+ txHash);
-						  contract.methods.getValue().call((err, value) => {
-							  console.log("The new stored value is: "+value);
-							});
+				rl.question('chain ID: ',(chainID)=>{
+					rl.question('new value: ',(newValue)=>{
+						const web3 = new Web3(URL);
+						const contract = new web3.eth.Contract(abi, cAddress);	
+						contract.methods.getValue().call((err, Value) => {
+							console.log("The stored value is: "+Value);
+						  });
+						web3.eth.getBalance(uAddress,(err,wei)=>{
+							console.log("User balance = "+web3.utils.fromWei(wei,'ether')+" Ether");
 						});
-					  });
-					rl.close();
+						web3.eth.getTransactionCount(uAddress, (err, txCount) => {
+							console.log("txCount: "+txCount);
+							const txObject = {
+							  nonce:    web3.utils.toHex(txCount),
+							  gasLimit: web3.utils.toHex(800000), 
+							  gasPrice: web3.utils.toHex(web3.utils.toWei('10', 'gwei')),
+							  to: cAddress,
+							  chainId: chainID,
+							  data: contract.methods.setValue(newValue).encodeABI()
+							};
+							const tx = new Tx(txObject);
+							tx.sign(Buffer.from(privatekey,'hex'));
+							const serializedTx = tx.serialize();
+							const raw = '0x' + serializedTx.toString('hex');
+							web3.eth.sendSignedTransaction(raw, (err, txHash) => {
+							  console.log(err);
+							  console.log('Success on txHash:'+ txHash);
+							  contract.methods.getValue().call((err, value) => {
+								  console.log("The new stored value is: "+value);
+								});
+							});
+						  });
+						rl.close();
+					});
 				});
             });
         });
