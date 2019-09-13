@@ -1,8 +1,8 @@
 {
-  "name": "no_wallet",
+  "name": "storeValue",
   "version": "1.0.0",
-  "description": "blockchain connection without wallet",
-  "main": "getBalance.js",
+  "description": "store value on Ethereum given the parameters",
+  "main": "storeValue.js",
   "dependencies": {
     "ethereumjs-tx": "^2.1.1",
     "web3": "^1.2.1"

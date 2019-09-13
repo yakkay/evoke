@@ -1,8 +1,8 @@
 FROM node:10
 
-WORKDIR ~/evoke/no_wallet/storeValue
+WORKDIR /home/yakkay/evoke/no_wallet/storeValue
 
-COPY package*.json . /
+COPY package*.json ./
 
 RUN npm install
 
