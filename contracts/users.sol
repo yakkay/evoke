@@ -1,12 +1,26 @@
 pragma solidity ^0.5.1;
 
-contract bc_api{
-    mapping (uint256 => address)users;
-    function setUser(uint256 id, address user)public{
-        users[id] = user;
+contract Users{
+    struct user {
+        address account;
+        uint[] missions;
     }
-    function gesUser(uint256 id)public view returns(address user){
-        user = users[id];
-        return user;
+    mapping (string => user) users;
+    address Bob;
+
+    constructor()public {
+        Bob = msg.sender;
+    }
+
+    function setUser(string memory mail,address _account,uint _mission)public{
+        require(msg.sender == Bob, "You are not Bob");
+        users[mail].account = _account;
+        users[mail].missions.push(_mission);
+    }
+
+    function getUser(string memory mail)public view returns(address _account,uint[] memory _mission){
+        _account = users[mail].account;
+        _mission = users[mail].missions;
+        return (_account,_mission);
     }
 }
