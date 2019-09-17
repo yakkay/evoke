@@ -3,7 +3,7 @@ pragma solidity ^0.5.1;
 contract Users{
     struct user {
         address account;
-        uint[] missions;
+        uint[] completed_missions;
         bool active;
     }
     mapping (string => user) users;
@@ -13,23 +13,32 @@ contract Users{
         Bob = msg.sender;
     }
 
-    function setUser(string memory mail,address _account)public returns(bool success){
+    function createUser(string memory mail,address _account)public returns(bool success){
         require(msg.sender == Bob, "You are not Bob");
         users[mail].account = _account;
         users[mail].active = true;
         return true;
     }
 
+    function setUser(string memory mail,bool status)public returns(bool success){
+        require(msg.sender == Bob,"you are not Bob");
+        users[mail].active = status;
+    }
+
     function approveMission(string memory mail,uint _mission)public returns(bool success){
         require(msg.sender == Bob, "You are not Bob");
         require(users[mail].active,"User does not exist or is not active");
-        users[mail].missions.push(_mission);
+        users[mail].completed_missions.push(_mission);
         return true;
     }
 
-    function getUser(string memory mail)public view returns(address _account,uint[] memory _mission){
+    function getUserAccount(string memory mail)public view returns(address _account){
         _account = users[mail].account;
-        _mission = users[mail].missions;
-        return (_account,_mission);
+        return _account;
+    }
+
+    function getUserMissions(string memory mail)public view returns(uint[] memory _missions){
+        _missions = users[mail].completed_missions;
+        return _missions;
     }
 }
