@@ -62,7 +62,7 @@ router.post('/',(req,res)=>{
 	});
 
 	
-	web3.eth.getTransactionCount('0xd7b61e052bacbb0ce0b9f8e932c2362574cfef7c', (err, txCount) => {
+	web3.eth.getTransactionCount('0xd7b61e052bacbb0ce0b9f8e932c2362574cfef7c', (Err, txCount) => {
 		console.log("txCount: "+txCount);
 		const txObject = {
 		  nonce:    web3.utils.toHex(txCount),
