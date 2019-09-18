@@ -13,23 +13,21 @@ contract Users{
         Bob = msg.sender;
     }
 
-    function createUser(string memory mail,address _account)public returns(bool success){
+    function createUser(string memory mail,address _account)public{
         require(msg.sender == Bob, "You are not Bob");
         users[mail].account = _account;
         users[mail].active = true;
-        return true;
     }
 
-    function setUser(string memory mail,bool status)public returns(bool success){
+    function setUser(string memory mail,bool status)public {
         require(msg.sender == Bob,"you are not Bob");
         users[mail].active = status;
     }
 
-    function approveMission(string memory mail,uint _mission)public returns(bool success){
+    function approveMission(string memory mail,uint _mission)public {
         require(msg.sender == Bob, "You are not Bob");
         require(users[mail].active,"User does not exist or is not active");
         users[mail].completed_missions.push(_mission);
-        return true;
     }
 
     function getUserAccount(string memory mail)public view returns(address _account){
