@@ -2,7 +2,7 @@ const request = require('request')
 
 request.post('http://127.0.0.1:3001/evocoin/balanceOf', {
   json: {
-    email_from: "smilenaguevara@gmail.com"
+    email_from: "yakkay@gmail.com"
   }
 }, (error, res, body) => {
   if (error) {
