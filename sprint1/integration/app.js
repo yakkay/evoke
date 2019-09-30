@@ -1,6 +1,6 @@
 const express = require('express');
-const evc = require('./evocoin');
-const user = require('./user');
+const evc = require('./evc_app');
+const user = require('./user_app');
 const app = express();
 
 app.use('/evocoin', evc);

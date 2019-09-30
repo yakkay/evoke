@@ -15,45 +15,45 @@ contract Users{
         Bob = msg.sender;
     }
 
-    function createUser(string memory mail,address _account)public{
-        require(msg.sender == Bob, "You are not Bob");
-        users[mail].account = _account;
-        users[mail].active = true;
+    function createUser(string memory sunbird_id,address _account)public{
+        //require(msg.sender == Bob, "You are not Bob");
+        users[sunbird_id].account = _account;
+        users[sunbird_id].active = true;
     }
 
-    function setUser(string memory mail,bool status)public {
-        require(msg.sender == Bob,"you are not Bob");
-        users[mail].active = status;
+    function setUser(string memory sunbird_id,bool status)public {
+        //require(msg.sender == Bob,"you are not Bob");
+        users[sunbird_id].active = status;
     }
 
-    function approveMission(string memory mail,uint _mission)public {
-        require(msg.sender == Bob, "You are not Bob");
-        require(users[mail].active,"User does not exist or is not active");
-        users[mail].completed_missions.push(_mission);
+    function approveMission(string memory sunbird_id,uint _mission)public {
+        //require(msg.sender == Bob, "You are not Bob");
+        //require(users[mail].active,"User does not exist or is not active");
+        users[sunbird_id].completed_missions.push(_mission);
     }
 
-    function getUserAccount(string memory mail)public view returns(address _account){
-        _account = users[mail].account;
+    function getUserAccount(string memory sunbird_id)public view returns(address _account){
+        _account = users[sunbird_id].account;
         return _account;
     }
 
-    function getUserMissions(string memory mail)public view returns(uint[] memory _missions){
-        _missions = users[mail].completed_missions;
+    function getUserMissions(string memory sunbird_id)public view returns(uint[] memory _missions){
+        _missions = users[sunbird_id].completed_missions;
         return _missions;
     }
 
-    function set_mission_score(string memory mail,uint mission,uint score)public {
-	require(msg.sender == Bob, "You are not Bob");
-	users[mail].mission_score[mission] = score;
+    function set_mission_score(string memory sunbird_id,uint mission,uint score)public {
+	//require(msg.sender == Bob, "You are not Bob");
+	users[sunbird_id].mission_score[mission] = score;
     }
 
-    function get_mission_score(string memory mail,uint mission)public view returns(uint score){
-    	score = users[mail].mission_score[mission];
-	return score;
+    function get_mission_score(string memory sunbird_id,uint mission)public view returns(uint score){
+    	score = users[sunbird_id].mission_score[mission];
+	    return score;
     }
 
-    function set_skill_points(uint points, string memory sunbird_id)public {
-        require(msg.sender == Bob, "Your are not Bob");
+    function set_skill_points( string memory sunbird_id, uint points)public {
+        //require(msg.sender == Bob, "Your are not Bob");
         users[sunbird_id].skill_points = points;
     }
 

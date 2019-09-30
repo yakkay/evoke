@@ -1,19 +1,18 @@
-const Evocoin_ABI = require('./evocoin_ABI');
-const evocoin_ABI = Evocoin_ABI.evocoin;
-const User_ABI = require('./user_ABI');
-const users_ABI = User_ABI.users;
+
+
 const Tx = require('ethereumjs-tx');
 const request = require('request');
-const Web3 = require ('web3');
 const express = require('express');
 const router = express.Router();
-const providerURL = "https://ropsten.infura.io/v3/XXX";
-const vaultURL = "http://172.18.0.2:3000/show-keys";
-const evocoin_contract = '0xB533303897C42E7fdd35Eb15FC9571C604aeB35b';
-const users_contract = 'XXX';
+
+const vaultURL = "http://localhost/show-keys";
+
+const providerURL = "http://localhost:7545";
+const Web3 = require ('web3');
 const web3 = new Web3(providerURL);
-const EVC_contract = new web3.eth.Contract(evocoin_ABI,evocoin_contract);
-const USERS_contract = new web3.eth.Contract(users_ABI,users_contract);
+const evc = require('./evc_contract');
+const contract = new web3.eth.Contract(evc.ABI,evc.address);
+
 router.use(express.json());
 
 router.post('/balanceOf',(Req,Res) => {
@@ -21,7 +20,7 @@ router.post('/balanceOf',(Req,Res) => {
 			if(err){Res.status(200).send(err);}
 			else Res.status(200).send({"evocoin": balance});
 		});
-	});
+});
 
 
 router.get('/supply',(Req,Res) => {

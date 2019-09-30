@@ -1,4 +1,6 @@
-module.exports.users = [
+module.exports.address = 'xxx';
+
+module.exports.ABI = [
 	{
 		"constant": false,
 		"inputs": [

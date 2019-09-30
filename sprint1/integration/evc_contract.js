@@ -1,4 +1,6 @@
-module.exports.evocoin = [
+module.exports.address = 'XXX' ;//'0xB533303897C42E7fdd35Eb15FC9571C604aeB35b'; //ropsten evocoin sc
+
+module.exports.ABI = [
 	{
 			"anonymous": false,
 			"inputs": [
