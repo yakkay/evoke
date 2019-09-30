@@ -46,8 +46,8 @@ router.post('/transfer',(Req,Res)=>{
 					'nonce': web3.utils.toHex(txCount),
 					'gasPrice': web3.utils.toHex(web3.utils.toWei('10','gwei')),
 					'gasLimit': web3.utils.toHex(800000),
-					'to': evocoin_contract,
-					'data': EVC_contract.methods.transfer('0x8FaEc66fe1Ae76D73adb14f9410bDca8d403EEdb',1).encodeABI()
+					'to': contract,
+					'data': contract.methods.transfer('0x8FaEc66fe1Ae76D73adb14f9410bDca8d403EEdb',1).encodeABI()
 				};
 				const tx = new Tx(txObject); 
 				request(vaultURL,(errRequest,res,Body)=>{
