@@ -1,13 +1,15 @@
-module.exports.address = 'xxx';
+module.exports.address = '0x90244De44845c553061F7E38bC5Fa6853eCD31c7';
 
-module.exports.ABI = [
+module.exports.url = 'http://localhost:7545';
+
+module.exports.ABI =[
 	{
 		"constant": false,
 		"inputs": [
 			{
-				"internalType": "string",
-				"name": "mail",
-				"type": "string"
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
 			},
 			{
 				"internalType": "uint256",
@@ -26,12 +28,12 @@ module.exports.ABI = [
 		"inputs": [
 			{
 				"internalType": "string",
-				"name": "mail",
+				"name": "sunbird_id",
 				"type": "string"
 			},
 			{
 				"internalType": "address",
-				"name": "_account",
+				"name": "account",
 				"type": "address"
 			}
 		],
@@ -45,9 +47,9 @@ module.exports.ABI = [
 		"constant": false,
 		"inputs": [
 			{
-				"internalType": "string",
-				"name": "mail",
-				"type": "string"
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
 			},
 			{
 				"internalType": "uint256",
@@ -70,14 +72,14 @@ module.exports.ABI = [
 		"constant": false,
 		"inputs": [
 			{
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			},
+			{
 				"internalType": "uint256",
 				"name": "points",
 				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "sunbird_id",
-				"type": "string"
 			}
 		],
 		"name": "set_skill_points",
@@ -90,9 +92,9 @@ module.exports.ABI = [
 		"constant": false,
 		"inputs": [
 			{
-				"internalType": "string",
-				"name": "mail",
-				"type": "string"
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
 			},
 			{
 				"internalType": "bool",
@@ -116,9 +118,9 @@ module.exports.ABI = [
 		"constant": true,
 		"inputs": [
 			{
-				"internalType": "string",
-				"name": "mail",
-				"type": "string"
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
 			},
 			{
 				"internalType": "uint256",
@@ -142,9 +144,9 @@ module.exports.ABI = [
 		"constant": true,
 		"inputs": [
 			{
-				"internalType": "string",
-				"name": "sunbird_id",
-				"type": "string"
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
 			}
 		],
 		"name": "get_skill_points",
@@ -163,17 +165,17 @@ module.exports.ABI = [
 		"constant": true,
 		"inputs": [
 			{
-				"internalType": "string",
-				"name": "mail",
-				"type": "string"
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
 			}
 		],
-		"name": "getUserAccount",
+		"name": "getUserId",
 		"outputs": [
 			{
-				"internalType": "address",
-				"name": "_account",
-				"type": "address"
+				"internalType": "string",
+				"name": "id",
+				"type": "string"
 			}
 		],
 		"payable": false,
@@ -184,16 +186,16 @@ module.exports.ABI = [
 		"constant": true,
 		"inputs": [
 			{
-				"internalType": "string",
-				"name": "mail",
-				"type": "string"
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
 			}
 		],
 		"name": "getUserMissions",
 		"outputs": [
 			{
 				"internalType": "uint256[]",
-				"name": "_missions",
+				"name": "missions",
 				"type": "uint256[]"
 			}
 		],

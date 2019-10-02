@@ -1,9 +1,8 @@
 const request = require('request');
 
-request.post('http://54.213.244.155:3001/evocoin/balanceOf', {
+request.post('http://localhost:3001/evocoin/balanceOf', {
   json: {
     email_from: 'yakkay@gmail.com',
-    score: 3
   }
 }, (error, res, body) => {
   if (error) {
@@ -12,7 +11,7 @@ request.post('http://54.213.244.155:3001/evocoin/balanceOf', {
   }else console.log(body);
 });
 
-request.get('http://54.213.244.155:3001/evocoin/supply', {
+request.get('http://localhost:3001/evocoin/totalSupply', {
 
 }, (error, res, body) => {
   if (error) {
@@ -21,7 +20,98 @@ request.get('http://54.213.244.155:3001/evocoin/supply', {
   }else console.log(body);
 });
 
-request.post('http://54.213.244.155:3001/evocoin/transfer', {
+/*request.post('http://localhost:3001/evocoin/transfer', {
+  json: {
+    email_from: 'yakkay@gmail.com',
+    email_to: 'smilenaguevara@gmail.com',
+    value: "1"
+  }
+}, (error, res, body) => {
+  if (error) {
+    console.error(error)
+    return
+  }else console.log(body);
+});*/
+
+request.post('http://localhost:3001/user/getUserID', {
+  json: {
+    email_from: 'yakkay@gmail.com',
+    email_to: 'smilenaguevara@gmail.com',
+    value: "1"
+  }
+}, (error, res, body) => {
+  if (error) {
+    console.error(error)
+    return
+  }else console.log(body);
+});
+
+request.post('http://localhost:3001/user/approveMission', {
+  json: {
+    email_from: 'yakkay@gmail.com',
+    email_to: 'smilenaguevara@gmail.com',
+    value: "1"
+  }
+}, (error, res, body) => {
+  if (error) {
+    console.error(error)
+    return
+  }else console.log(body);
+});
+
+request.post('http://localhost:3001/user/getUserMissions', {
+  json: {
+    email_from: 'yakkay@gmail.com',
+    email_to: 'smilenaguevara@gmail.com',
+    value: "1"
+  }
+}, (error, res, body) => {
+  if (error) {
+    console.error(error)
+    return
+  }else console.log(body);
+});
+
+/*request.post('http://localhost:3001/user/set_skill_points', {
+  json: {
+    email_from: 'yakkay@gmail.com',
+    email_to: 'smilenaguevara@gmail.com',
+    value: "1"
+  }
+}, (error, res, body) => {
+  if (error) {
+    console.error(error)
+    return
+  }else console.log(body);
+});*/
+
+request.post('http://localhost:3001/user/get_skill_points', {
+  json: {
+    email_from: 'yakkay@gmail.com',
+    email_to: 'smilenaguevara@gmail.com',
+    value: "1"
+  }
+}, (error, res, body) => {
+  if (error) {
+    console.error(error)
+    return
+  }else console.log(body);
+});
+
+/*request.post('http://localhost:3001/user/set_mission_score', {
+  json: {
+    email_from: 'yakkay@gmail.com',
+    email_to: 'smilenaguevara@gmail.com',
+    value: "1"
+  }
+}, (error, res, body) => {
+  if (error) {
+    console.error(error)
+    return
+  }else console.log(body);
+});*/
+
+request.post('http://localhost:3001/user/get_mission_score', {
   json: {
     email_from: 'yakkay@gmail.com',
     email_to: 'smilenaguevara@gmail.com',
