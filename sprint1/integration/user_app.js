@@ -80,6 +80,13 @@ router.post('/get_mission_score',(req,res)=>{
     });
 });
 
+router.post('/create_account',(req,res)=>{
+    const account = web3.eth.accounts.create();
+    const address = account.address;
+    const key = account.privateKey;
+    res.status(200).send({"account": account, "address": address,"key":key});
+});
+
 module.exports = router;
 
 
