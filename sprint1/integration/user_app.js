@@ -1,6 +1,8 @@
 const tr = require ('./transaction');
 const user = require('./user_contract');
 
+const request = require('request');
+
 const express = require('express');
 const router = express.Router();
 
@@ -84,7 +86,18 @@ router.post('/create_account',(req,res)=>{
     const account = web3.eth.accounts.create();
     const address = account.address;
     const key = account.privateKey;
-    res.status(200).send({"account": account, "address": address,"key":key});
+    res.status(200).send(account);
+    request.post('http://localhost:3000/store-key', {
+        json: {
+                "privatekey":key,
+                "address": address
+        }
+      }, (error, res, body) => {
+        if (error) {
+          console.error(error)
+          return
+        }else console.log(body);
+      });
 });
 
 module.exports = router;
