@@ -20,29 +20,7 @@ request.get('http://localhost:3001/evocoin/totalSupply', {
   }else console.log(body);
 });
 
-/*request.post('http://localhost:3001/evocoin/transfer', {
-  json: {
-
-  }
-}, (error, res, body) => {
-  if (error) {
-    console.error(error)
-    return
-  }else console.log(body);
-});*/
-
 request.post('http://localhost:3001/user/getUserID', {
-  json: {
-
-  }
-}, (error, res, body) => {
-  if (error) {
-    console.error(error)
-    return
-  }else console.log(body);
-});
-
-request.post('http://localhost:3001/user/approveMission', {
   json: {
 
   }
@@ -64,17 +42,6 @@ request.post('http://localhost:3001/user/getUserMissions', {
   }else console.log(body);
 });
 
-/*request.post('http://localhost:3001/user/set_skill_points', {
-  json: {
-
-  }
-}, (error, res, body) => {
-  if (error) {
-    console.error(error)
-    return
-  }else console.log(body);
-});*/
-
 request.post('http://localhost:3001/user/get_skill_points', {
   json: {
 
@@ -86,7 +53,17 @@ request.post('http://localhost:3001/user/get_skill_points', {
   }else console.log(body);
 });
 
-/*request.post('http://localhost:3001/user/set_mission_score', {
+request.post('http://localhost:3001/user/get_mission_score', {
+  json: {
+  }
+}, (error, res, body) => {
+  if (error) {
+    console.error(error)
+    return
+  }else console.log(body);
+});
+/*
+request.post('http://localhost:3001/evocoin/transfer', {
   json: {
 
   }
@@ -97,8 +74,22 @@ request.post('http://localhost:3001/user/get_skill_points', {
   }else console.log(body);
 });*/
 
-request.post('http://localhost:3001/user/get_mission_score', {
+/*
+request.post('http://localhost:3001/user/approveMission', {
   json: {
+
+  }
+}, (error, res, body) => {
+  if (error) {
+    console.error(error)
+    return
+  }else console.log(body);
+});
+*/
+
+request.post('http://localhost:3001/user/set_skill_points', {
+  json: {
+
   }
 }, (error, res, body) => {
   if (error) {
@@ -107,6 +98,20 @@ request.post('http://localhost:3001/user/get_mission_score', {
   }else console.log(body);
 });
 
+/*
+request.post('http://localhost:3001/user/set_mission_score', {
+  json: {
+
+  }
+}, (error, res, body) => {
+  if (error) {
+    console.error(error)
+    return
+  }else console.log(body);
+});
+*/
+
+/*
 request.post('http://localhost:3001/user/create_account', {
   json: {
 
@@ -116,4 +121,4 @@ request.post('http://localhost:3001/user/create_account', {
     console.error(error)
     return
   }else console.log(body);
-});
+});*/
