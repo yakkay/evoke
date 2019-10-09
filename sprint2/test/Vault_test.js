@@ -3,10 +3,11 @@ const app = express();
 
 app.use(express.json());
 
-app.get('/show-keys', (req, res)=>{
-    console.log('key delivered');
-    res.status(200).send("XXX");	
-   
+app.post('/show-keys', (req, res)=>{
+    console.log('Account delivered');
+    res.status(200).send(
+
+    );	 
 });
 
 app.post('/store-key',(req,res)=>{
@@ -17,3 +18,4 @@ app.post('/store-key',(req,res)=>{
 app.listen(3000, () => {
     console.log("Vault Test");
 });
+
