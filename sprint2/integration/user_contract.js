@@ -1,6 +1,6 @@
-module.exports.address = '0x90244De44845c553061F7E38bC5Fa6853eCD31c7';
+module.exports.address = process.env.userAddress ||'0xE4aFeb1093a38C6Ab7B7fC2896f664DEeD267D2c';
 
-module.exports.url = 'http://localhost:7545';
+module.exports.url = process.env.userURLcontract || 'http://localhost:8545';
 
 module.exports.ABI =[
 	{
