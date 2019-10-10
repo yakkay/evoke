@@ -1,4 +1,4 @@
-FROM ganache-cli:6.7.0
+FROM ganache
 
 ADD db1/ ./
 
