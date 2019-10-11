@@ -1,5 +1,5 @@
 module.exports.address = process.env.evcAddress || '0xa97bb10e125e9d2662fC7e5B9FaD62586C842256' ;//'0xB533303897C42E7fdd35Eb15FC9571C604aeB35b'; //ropsten evocoin sc
-module.exports.url = process.env.evcURLcontract || 'http://localhost:8545';
+module.exports.url = process.env.evcURLcontract || 'http://172.18.0.13:8545';
 module.exports.ABI = [
 	{
 			"anonymous": false,
