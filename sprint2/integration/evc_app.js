@@ -16,7 +16,7 @@ router.post('/transfer',(req,res)=>{
             evc.address,
             req.body.addressfrom,//sender
             req.body.privatekey,//key
-            contract.methods.transfer(req.body.addressto/*user address*/,req.body.amount).encodeABI()
+            contract.methods.transfer(req.body.addressto,req.body.amount).encodeABI()
         ); 
         contract.methods.balanceOf(req.body.addressto).call((err,balance)=>{
             if(err){res.status(200).send(err);}
@@ -25,7 +25,7 @@ router.post('/transfer',(req,res)=>{
 });
 
 router.post('/balanceOf',(req,res)=>{
-    contract.methods.balanceOf('0x29d59cff15Cd3fF4be5373df19982D6D7301da8d').call((err,balance)=>{
+    contract.methods.balanceOf(req.body.address).call((err,balance)=>{
         if(err){res.status(200).send(err);}
         else res.status(200).send({"evocoin": balance});
     });

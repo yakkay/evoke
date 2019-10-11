@@ -87,17 +87,6 @@ router.post('/create_account',(req,res)=>{
     const address = account.address;
     const key = account.privateKey;
     res.status(200).send(account);
-    request.post('http://localhost:3000/store-key', {
-        json: {
-                "privatekey":key,
-                "address": address
-        }
-      }, (error, res, body) => {
-        if (error) {
-          console.error(error)
-          return
-        }else console.log(body);
-      });
 });
 
 module.exports = router;
