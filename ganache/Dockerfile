@@ -1,4 +1,4 @@
-FROM ganache
+FROM trufflesuite/ganache-cli 
 
 ADD db1/ ./
 
