@@ -117,7 +117,7 @@ request.post('http://localhost:3001/user/set_mission_score', {
 });
 */
 
-
+/*
 request.post('http://localhost:3001/user/create_account', {
   json: {
 
@@ -127,13 +127,14 @@ request.post('http://localhost:3001/user/create_account', {
     console.error(error)
     return
   }else console.log(body);
-});
+});*/
 
+/*
 request.post('http://localhost:3001/ruby/transfer', {
   json: { 
-      'addressfrom': '0xFfbda0B2E2cef039d4720CA02d5650FE90962F86',
-      'privatekey':'41e43e05a49a0951e6ce29471c034306fa3ee91929e066ea015b1315e6e6ff0f',
-      'addressto': '0xd7B61E052bacbb0CE0b9F8E932C2362574cFEf7C',
+      'addressfrom': '0xd7B61E052bacbb0CE0b9F8E932C2362574cFEf7C',
+      'privatekey':'5e00da209def84dbbe55566afe65a00d4e8408e4a2cc8a94a66dc47d54f52ccc',
+      'addressto': '0x9B0aB973b22eC2691531EbA150F41DffFF0C2CA5',
       'amount':1
   }
 }, (error, res, body) => {
@@ -141,11 +142,11 @@ request.post('http://localhost:3001/ruby/transfer', {
     console.error(error)
     return
   }else console.log(body);
-});
+});*/
 
 request.post('http://localhost:3001/ruby/balanceOf', {
   json: {
-          address: "0xFfbda0B2E2cef039d4720CA02d5650FE90962F86"
+          address: "0x9B0aB973b22eC2691531EbA150F41DffFF0C2CA5"
   }
 }, (error, res, body) => {
   if (error) {
