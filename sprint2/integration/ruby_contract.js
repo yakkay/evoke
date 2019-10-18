@@ -1,5 +1,5 @@
 module.exports.address = process.env.rubyAddress || '0xE4aFeb1093a38C6Ab7B7fC2896f664DEeD267D2c';
-module.exports.url = process.env.rubyURLcontract || 'http://localhost:8545';
+module.exports.url = process.env.rubyURLcontract || 'http://172.18.0.13:8545';
 module.exports.ABI = [
 	{
 		"anonymous": false,

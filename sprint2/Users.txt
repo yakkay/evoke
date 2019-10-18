@@ -1,6 +1,6 @@
-Admin: yakkay@gmail.com
+Admin: smilenaguevara@gmail.com
 
 address: 0xffbda0b2e2cef039d4720ca02d5650fe90962f86
-private: 41e43e05a49a0951e6ce29471c034306fa3ee91929e066ea015b1315e6e6ff0f
+privateKey: 41e43e05a49a0951e6ce29471c034306fa3ee91929e066ea015b1315e6e6ff0f
 
 
