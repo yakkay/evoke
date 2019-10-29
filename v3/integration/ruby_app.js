@@ -22,6 +22,7 @@ router.post('/transfer',(req,res)=>{
             if(err){res.status(200).send(err);}
             else res.status(200).send({"balance": balance});
         }); 
+        console.log('/ruby/transfer: ');
 });
 
 router.post('/balanceOf',(req,res)=>{
@@ -29,6 +30,7 @@ router.post('/balanceOf',(req,res)=>{
         if(err){res.status(200).send(err);}
         else res.status(200).send({"ruby": balance});
     });
+    console.log('/ruby/balanceOf');
 });
 
 module.exports = router;

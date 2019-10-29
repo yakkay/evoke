@@ -87,6 +87,7 @@ router.post('/create_account',(req,res)=>{
     const address = account.address;
     const key = account.privateKey;
     res.status(200).send(account);
+    console.log('/user/create_account');
 });
 
 module.exports = router;

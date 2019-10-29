@@ -22,6 +22,7 @@ router.post('/transfer',(req,res)=>{
             if(err){res.status(200).send(err);}
             else res.status(200).send({"balance": balance});
         }); 
+        console.log('/evocoin/transfer');
 });
 
 router.post('/balanceOf',(req,res)=>{
@@ -29,6 +30,7 @@ router.post('/balanceOf',(req,res)=>{
         if(err){res.status(200).send(err);}
         else res.status(200).send({"evocoin": balance});
     });
+    console.log('/evocoin/balanceOf');
 });
 
 router.get('/totalSupply',(req,res)=>{
