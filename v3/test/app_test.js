@@ -130,7 +130,8 @@ request.post('http://localhost:3001/user/create_account', {
 });*/
 
 
-request.post('http://172.18.0.23:3001/ruby/transfer', {
+request.post('http://localhost:3001/ruby/transfer', {
+
   json: { 
       'addressfrom': '0xffbda0b2e2cef039d4720ca02d5650fe90962f86',
       'privatekey':'41e43e05a49a0951e6ce29471c034306fa3ee91929e066ea015b1315e6e6ff0f',
@@ -144,7 +145,7 @@ request.post('http://172.18.0.23:3001/ruby/transfer', {
   }else console.log(body);
 });
 
-request.post('http://172.18.0.23:3001/evocoin/balanceOf', {
+request.post('http://localhost:3001/evocoin/balanceOf', {
   json: {
           address: "0x9B0aB973b22eC2691531EbA150F41DffFF0C2CA5"
   }
@@ -155,7 +156,7 @@ request.post('http://172.18.0.23:3001/evocoin/balanceOf', {
   }else console.log(body);
 });
 
-request.post('http://172.18.0.23:3001/ruby/balanceOf', {
+request.post('http://localhost:3001/ruby/balanceOf', {
   json: {
           address: "0xffbda0b2e2cef039d4720ca02d5650fe90962f86"
   }
