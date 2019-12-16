@@ -1,9 +1,6 @@
 const Tx = require('ethereumjs-tx');
-var transaction_ended = true;
 
   exports.transaction = function(web3,contract_address,sender,privatekey,method){ 
-      if(transaction_ended){
-        transaction_ended = false;
         console.log('sender: '+sender);
         console.log('privatekey:'+privatekey);
         console.log('method: '+method);
@@ -24,9 +21,7 @@ var transaction_ended = true;
                 web3.eth.sendSignedTransaction(raw,(err,txHash)=>{
                     if(err){console.log('error sending ',err);}
                 }).on('receipt',(receipt)=>{
-                    transaction_ended = true;
                     console.log('Transaction ended: '+receipt.status);
                 });
-        });
-      }else{console.log('There is a transaction in progress, please try again later');}   
+        });  
 }

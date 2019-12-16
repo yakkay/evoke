@@ -56,7 +56,7 @@ router.post('/pay_mission_score_user',(req,res)=>{
         req.body.addressfrom,//sender
         req.body.privatekey,//key
         contract.methods.pay_mission_score_user(req.body.mission_id,req.body.score,req.body.user).encodeABI()
-    );res.status(200).send('Payment send to the blockchain');
+    );res.status(200).send('Payment sent to the blockchain');
 });
 
 router.post('/transfer',(req,res)=>{
