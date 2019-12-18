@@ -13,6 +13,7 @@ contract ERC20 {
 
     event Approval(address indexed from, address indexed spender, uint256 value);
     event Transfer(address indexed from, address indexed to, uint256 value);
+    event Pay_reward(address indexed player, uint256 value);
 
     mapping(address => uint256) balance;
     mapping(address => mapping (address => uint256)) allowed;
@@ -22,8 +23,7 @@ contract ERC20 {
 
    constructor(uint256 total) public {
         if(total>0){TotalSupply = total;}
-        else{TotalSupply = 100000;
-        }
+        else{TotalSupply = 100000;}
         balance[msg.sender] = TotalSupply;
         Owner = msg.sender;
     }
@@ -82,6 +82,7 @@ contract ERC20 {
         Mission_user_paid[mission_id][user] = Mission_score_reward[mission_id][score];
         balance[msg.sender] = balance[msg.sender].sub(Mission_score_reward[mission_id][score]);
         balance[user] = balance[user].add(Mission_score_reward[mission_id][score]);
+        emit Pay_reward(user,Mission_score_reward[mission_id][score]);
         return true;
     }
 
