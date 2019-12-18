@@ -46,7 +46,9 @@ router.post('/set_mission_score_reward',(req,res)=>{
         req.body.addressfrom,//sender
         req.body.privatekey,//key
         contract.methods.set_mission_score_reward(req.body.mission_id,req.body.score,req.body.reward).encodeABI()
-    );res.status(200).send('Mission Score reward sent to the blockchain');
+    ).then((data)=>{
+        res.status(200).send('Blockchain transaction:'+data);}).catch((error)=>{
+            res.status(500).send('Error en la transacción Blockchain: '+error);});
 });
 
 router.post('/pay_mission_score_user',(req,res)=>{
