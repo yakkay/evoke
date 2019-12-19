@@ -47,7 +47,7 @@ router.post('/set_mission_score_reward',(req,res)=>{
         req.body.privatekey,//key
         contract.methods.set_mission_score_reward(req.body.mission_id,req.body.score,req.body.reward).encodeABI()
     ).then((data)=>{
-        res.status(200).send('Set reward on Blockchain:'+data);}).catch((error)=>{
+        res.status(200).send('Set reward on Blockchain: '+data);}).catch((error)=>{
             res.status(500).send('Error seting reward: '+error);});
 });
 
@@ -59,7 +59,7 @@ router.post('/pay_mission_score_user',(req,res)=>{
         req.body.privatekey,//key
         contract.methods.pay_mission_score_user(req.body.mission_id,req.body.score,req.body.user).encodeABI()
     ).then((data)=>{
-        res.status(200).send('Pay reward:'+data);}).catch((error)=>{
+        res.status(200).send('Pay reward: '+data);}).catch((error)=>{
             res.status(500).send('Error on pay reward: '+error);});
 });
 

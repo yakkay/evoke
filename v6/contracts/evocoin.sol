@@ -1,8 +1,6 @@
 pragma solidity ^0.5.1;
 
 contract ERC20 {
-    //moodle id, for different instances
-    mapping(uint256 =>  mapping(address => uint256))Mission_user_paid;
     mapping(uint256 =>mapping(uint256 => uint256))Mission_score_reward;
 
     string public constant Name = "Evocoin";
@@ -77,14 +75,13 @@ contract ERC20 {
     }
 
     function pay_mission_score_user(uint256 mission_id,uint256 score, address user)public returns(bool){
-        //require(Mission_user_paid[mission_id][user] == 0,"This mission has alredy been paid");
+        require(msg.sender == Owner,"only the owner can pay");
         require(Mission_score_reward[mission_id][score] <= balance[msg.sender],"You don't have enough founds");
-        //Mission_user_paid[mission_id][user] = Mission_score_reward[mission_id][score];
         uint256 reward = Mission_score_reward[mission_id][score];
         if(score == 1 && reward == 0){reward = 1;}
         if(score == 2 && reward == 0){reward = 2;}
-        balance[msg.sender] = balance[msg.sender].sub(reward);//balance[msg.sender].sub(Mission_score_reward[mission_id][score]);
-        balance[user] = balance[user].add(reward);//Mission_score_reward[mission_id][score]);
+        balance[msg.sender] = balance[msg.sender].sub(reward);
+        balance[user] = balance[user].add(reward);
         emit Pay_reward(user,reward);
         return true;
     }
@@ -98,9 +95,6 @@ contract ERC20 {
         if(score == 1 && reward == 0){reward = 1;}
         if(score == 2 && reward == 0){reward = 2;}
         return reward;
-    }
-    function get_mission_user_paid(uint256 mission_id,address user)public view returns(uint256){
-        return Mission_user_paid[mission_id][user];
     }
 }
 

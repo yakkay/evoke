@@ -1,4 +1,4 @@
-module.exports.address = process.env.evcAddress || '0x02d7eebb94050ed2Ef3b9a1399a6a4F0754Bd6a7';//'0x0290A06a6d0EDE8fe79498c357b5C61E58857b75';//'0xb4db44ccB30e1cA4d48b9654D04386a7929E03e5';
+module.exports.address = process.env.evcAddress || '0x41E302D16DeEe2E872561A672EDF85EC9d8F33F0';//'0x02d7eebb94050ed2Ef3b9a1399a6a4F0754Bd6a7';
 module.exports.url = process.env.evcURLcontract || 'https://ropsten.infura.io/v3/2516d9bfa9894fd79838a4df6611801d';
 module.exports.ABI = [
 	{
@@ -319,32 +319,6 @@ module.exports.ABI = [
 			}
 		],
 		"name": "get_mission_score_reward",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "mission_id",
-				"type": "uint256"
-			},
-			{
-				"internalType": "address",
-				"name": "user",
-				"type": "address"
-			}
-		],
-		"name": "get_mission_user_paid",
 		"outputs": [
 			{
 				"internalType": "uint256",
