@@ -52,6 +52,7 @@ router.post('/set_mission_score_reward',(req,res)=>{
 });
 
 router.post('/pay_mission_score_user',(req,res)=>{
+    console.log('mission id: '+req.body.mission_id);
     tr.transaction(
         web3,
         evc.address,

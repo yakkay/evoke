@@ -3,8 +3,6 @@ const Tx = require('ethereumjs-tx');
   exports.transaction = function(web3,contract_address,sender,privatekey,method){ 
         return new Promise ((res,rej)=>{
             console.log('sender: '+sender);
-            console.log('privatekey:'+privatekey);
-            console.log('method: '+method);
             web3.eth.getTransactionCount(sender,(err,txCount)=>{
                 console.log(txCount);
                 if(err){console.log('error count ',err);}

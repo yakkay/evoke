@@ -32,18 +32,6 @@ request.get('http://localhost:3001/evocoin/get_mission_score_reward', {
   }else console.log(body);
 });
 
-request.get('http://localhost:3001/evocoin/get_mission_user_paid', {
-  json: {
-          mission_id: 1,
-          user: '0xd7B61E052bacbb0CE0b9F8E932C2362574cFEf7C'
-  }
-}, (error, res, body) => {
-  if (error) {
-    console.error(error)
-    return
-  }else console.log(body);
-});
-
 /*
 request.post('http://localhost:3001/evocoin/set_mission_score_reward', {
   json: {
