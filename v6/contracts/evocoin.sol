@@ -94,7 +94,10 @@ contract ERC20 {
         return true;
     }
     function get_mission_score_reward(uint256 mission_id,uint256 score)public view returns(uint256){
-        return Mission_score_reward[mission_id][score];
+        uint256 reward = Mission_score_reward[mission_id][score];
+        if(score == 1 && reward == 0){reward = 1;}
+        if(score == 2 && reward == 0){reward = 2;}
+        return reward;
     }
     function get_mission_user_paid(uint256 mission_id,address user)public view returns(uint256){
         return Mission_user_paid[mission_id][user];
