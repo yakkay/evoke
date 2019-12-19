@@ -77,12 +77,15 @@ contract ERC20 {
     }
 
     function pay_mission_score_user(uint256 mission_id,uint256 score, address user)public returns(bool){
-        require(Mission_user_paid[mission_id][user] == 0,"This mission has alredy been paid");
+        //require(Mission_user_paid[mission_id][user] == 0,"This mission has alredy been paid");
         require(Mission_score_reward[mission_id][score] <= balance[msg.sender],"You don't have enough founds");
-        Mission_user_paid[mission_id][user] = Mission_score_reward[mission_id][score];
-        balance[msg.sender] = balance[msg.sender].sub(Mission_score_reward[mission_id][score]);
-        balance[user] = balance[user].add(Mission_score_reward[mission_id][score]);
-        emit Pay_reward(user,Mission_score_reward[mission_id][score]);
+        //Mission_user_paid[mission_id][user] = Mission_score_reward[mission_id][score];
+        uint256 reward = Mission_score_reward[mission_id][score];
+        if(score == 1 && reward == 0){reward = 1;}
+        if(score == 2 && reward == 0){reward = 2;}
+        balance[msg.sender] = balance[msg.sender].sub(reward);//balance[msg.sender].sub(Mission_score_reward[mission_id][score]);
+        balance[user] = balance[user].add(reward);//Mission_score_reward[mission_id][score]);
+        emit Pay_reward(user,reward);
         return true;
     }
 

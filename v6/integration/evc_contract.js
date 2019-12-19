@@ -1,4 +1,4 @@
-module.exports.address = process.env.evcAddress || '0x0290A06a6d0EDE8fe79498c357b5C61E58857b75';//'0xb4db44ccB30e1cA4d48b9654D04386a7929E03e5';
+module.exports.address = process.env.evcAddress || '0x3Ed4233a9afb7c2306d280C694A1721534Fdf278';//'0x0290A06a6d0EDE8fe79498c357b5C61E58857b75';//'0xb4db44ccB30e1cA4d48b9654D04386a7929E03e5';
 module.exports.url = process.env.evcURLcontract || 'https://ropsten.infura.io/v3/2516d9bfa9894fd79838a4df6611801d';
 module.exports.ABI = [
 	{
