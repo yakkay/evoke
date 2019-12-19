@@ -69,7 +69,7 @@ request.post('http://localhost:3001/evocoin/transfer', {
   json: { 
       'addressfrom': '0xE401862558e44fa2547b66a6C1D50c8492718997',
       'privatekey':'57a29559e91df761c933986caf25debac5e21f4056d4487150cdcaab5cd37096',
-      'addressto': '0xafd195Be11847dF1Bcd92D430d310E645578F089',
+      'addressto': '0xD98c20892871d698039Df5969b863974234498B2',
       'amount':46
   }
 }, (error, res, body) => {
