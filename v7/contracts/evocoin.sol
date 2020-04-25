@@ -1,7 +1,6 @@
 pragma solidity >=0.4.22 <0.7.0;
-
+//cuenta de campaña, donador y tokens usados por campaña
 contract ERC20 {
-    mapping(uint256 =>mapping(uint256 => uint256))Mission_score_reward;
 
     string public constant Name = "Evocoin";
     string public constant Symbol = "EVC";
@@ -21,7 +20,7 @@ contract ERC20 {
 
    constructor(uint256 total) public {
         if(total>0){TotalSupply = total;}
-        else{TotalSupply = 100000;}
+        else{TotalSupply = 440000000;}
         balance[msg.sender] = TotalSupply;
         Owner = msg.sender;
     }
@@ -72,29 +71,6 @@ contract ERC20 {
 
     function allowance(address owner, address spender) public view returns (uint) {
         return allowed[owner][spender];
-    }
-
-    function pay_mission_score_user(uint256 mission_id,uint256 score, address user)public returns(bool){
-        require(msg.sender == Owner,"only the owner can pay");
-        require(Mission_score_reward[mission_id][score] <= balance[msg.sender],"You don't have enough founds");
-        uint256 reward = Mission_score_reward[mission_id][score];
-        if(score == 1 && reward == 0){reward = 1;}
-        if(score == 2 && reward == 0){reward = 2;}
-        balance[msg.sender] = balance[msg.sender].sub(reward);
-        balance[user] = balance[user].add(reward);
-        emit Pay_reward(user,reward);
-        return true;
-    }
-
-    function set_mission_score_reward(uint256 mission_id,uint256 score, uint reward)public returns(bool){
-        Mission_score_reward[mission_id][score] = reward;
-        return true;
-    }
-    function get_mission_score_reward(uint256 mission_id,uint256 score)public view returns(uint256){
-        uint256 reward = Mission_score_reward[mission_id][score];
-        if(score == 1 && reward == 0){reward = 1;}
-        if(score == 2 && reward == 0){reward = 2;}
-        return reward;
     }
 }
 
