@@ -23,7 +23,6 @@ axios.get('http://localhost:3001/campaign/redeemed',options).then(function(respo
   console.log(error);
 });
 
-
 /*
 axios.get('http://localhost:3001/user/balance?id=2',options).then(function(response){
   console.log(response.data);
