@@ -5,11 +5,11 @@ const router = express.Router();
 router.use(express.json());
 
 router.get('/agentPaid',(req,res)=>{
-    console.log('balance: 880.000.000');
+    console.log('balance');
     res.json(
         {
             address:  "0x02d7eebb94050ed2Ef3b9a1399a6a4F0754Bd6a7",
-            campaign: "EAN",
+            campaign: "Piloto EAN: Ciudades Sostonibles",
             paid: 400000000
         }
     );
@@ -17,22 +17,22 @@ router.get('/agentPaid',(req,res)=>{
 
 
 router.get('/budget',(req,res)=>{
-    console.log('budget: 880.000.000');
+    console.log('budget');
     res.json(
         {
             address:  "0x02d7eebb94050ed2Ef3b9a1399a6a4F0754Bd6a7",
-            campaign: "EAN",
+            campaign: "Piloto EAN: Ciudades Sostonibles",
             budget: 880000000
         }
     );
 });
 
 router.get('/redeemed',(req,res)=>{
-    console.log('redeemed: 880.000.000');
+    console.log('redeemed');
     res.json(
         {
             address:  "0x02d7eebb94050ed2Ef3b9a1399a6a4F0754Bd6a7",
-            campaign: "EAN",
+            campaign: "Piloto EAN: Ciudades Sostonibles",
             redeemed: 0
         }
     );
