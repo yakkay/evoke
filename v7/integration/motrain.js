@@ -4,7 +4,6 @@ const bearer = credentials.bearer;
 const account = credentials.account;
 const host= credentials.host;
 const section = credentials.section;
-const user = credentials.user;
 const options = {
     headers: {
         accept: "application/json",

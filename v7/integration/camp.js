@@ -4,6 +4,25 @@ const router = express.Router();
 
 router.use(express.json());
 
+router.get('/',(req,res)=>{
+    motrain.paid().then(used=>{
+        res.json(
+            {
+                address: "0x02d7eebb94050ed2Ef3b9a1399a6a4F0754Bd6a7",
+                name: "Ciudades Sostenibles piloto EAN",
+                location: "Colombia",
+                status: "Activa",
+                thumbnail: "https://evokecolombia.com/theme/image.php/adaptable/theme/1587762760/login",
+                token: "EVC",
+                totalBudget: 880000000,
+                usedBudget:used
+            }
+        );
+    });
+});
+
+
+/*
 router.get('/agentPaid',(req,res)=>{
     console.log('paid2');
     motrain.paid().then(totalPaid=>{
@@ -17,7 +36,6 @@ router.get('/agentPaid',(req,res)=>{
     });
     
 });
-
 
 router.get('/budget',(req,res)=>{
     console.log('budget');
@@ -40,6 +58,6 @@ router.get('/redeemed',(req,res)=>{
         }
     );
 });
-
+*/
 
 module.exports = router;
