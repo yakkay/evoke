@@ -1,5 +1,4 @@
 const express = require('express');
-const evc = require('./evc');
 const user = require('./user');
 const camp = require('./camp');
 
