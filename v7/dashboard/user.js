@@ -14,17 +14,6 @@ router.get('/create_account',(req,res)=>{
     console.log('/user/create_account');
 });
 
-/*
-router.get('/balance',(req,res)=>{
-    console.log('Query recibido en /user: '+req.query.id);
-    motrain.balance(req.query.id).then((data)=>{
-        res.status(200).send(data);
-    }).catch((error)=>{
-        res.status(500).send(error);
-    });
-});
-*/
-
 module.exports = router;
 
 
