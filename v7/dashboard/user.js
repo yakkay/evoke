@@ -16,9 +16,8 @@ router.get('/create_account',(req,res)=>{
 router.get('/id/:pagina',(req,res)=>{
     motrain.users(req.params.pagina).then(users=>{
         console.log('página: '+req.params.pagina)
-        res.json(users);
-    })
-    
+        res.status(200).json(users);
+    })  
 })
 
 module.exports = router;
