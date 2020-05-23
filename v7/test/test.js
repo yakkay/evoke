@@ -4,19 +4,19 @@ const options = {
       accept: "application/json"
   }
 };
-/*
+
 axios.get('http://localhost:3001/campaign/',options).then(function(response){
   console.log(response.data);
 }).catch(function(error){
   console.log(error);
-});*/
-
+});
+/*
 axios.get('http://localhost:3001/user/id/2',options).then(function(response){
   console.log(response.data);
 }).catch(function(error){
   console.log(error);
 });
-
+*/
 /*
 axios.get('http://localhost:3001/campaign/budget',options).then(function(response){
   console.log(response.data);
