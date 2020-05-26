@@ -12,8 +12,8 @@ axios.get('http://localhost:3001/user/create_account').then(function(response){
 axios.post('http://172.18.0.16:3000/create-mootivated-bc-users/',
 {
   "id_motrain": "30b723ef-fa97-5d3e-9777-9958c20d0c64",
-  "pv_key": "0x988a4a896170c8324219908a494638f1c7d0c0a7e9f9011aecb6687be53da164",
-  "address": "0x1C7c80b44c430befA6c46aE9BfED8813C118366f"
+  "pv_key": "0x888a4a896170c8324219908a494638f1c7d0c0a7e9f9011aecb6687be53da163",
+  "address": "0x2C7c80b44c430befA6c46aE9BfED8813C118366E"
 }
 ).then(function(response){
   console.log(response.data);
