@@ -60,7 +60,7 @@ axios.get(host+'/sections/'+section+'/users',options).then(response1 => {
         ).then(function (response) {
             console.log(response.data.address)
             balance.balanceOf(response.data.address).then(function(b){
-                console.log('balance '+b)
+                if(0 < b < element.coins) console.log('balance '+b+'\n coins '+element.coins)
             })
         }).catch(function(error) {
             console.log(error)
