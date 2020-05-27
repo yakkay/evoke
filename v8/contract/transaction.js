@@ -26,5 +26,4 @@ exports.transaction = function(web3,contract_address,sender,privatekey,method){
                     })
             })
         })
-  
 }

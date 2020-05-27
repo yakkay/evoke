@@ -1,3 +1,4 @@
+
 const CronJob = require ('cron').CronJob
 const balance = require ('./balance')
 const tr = require('./transaction')
@@ -17,7 +18,10 @@ const options = {
         accept: "application/json",
         Authorization: bearer,
     }
-  }
+}
+
+var countUser = 0;
+var agents;
 
 function createAccount () {
     return web3.eth.accounts.create()
@@ -44,11 +48,15 @@ async function checkUser(user){
                     ownerPk,
                     Web3Contract.methods.transfer(agentAddress,amount).encodeABI()
                 ).then(result => {
+                    nextTransfer()
                     console.log ('Transfer success: '+result)
                     }
                 ).catch(error => {
                     console.log (error)
                 })
+            }else{
+                nextTransfer()
+                console.log('Balance of the user is update')
             }
         })
     }).catch(function(error) {
@@ -56,12 +64,14 @@ async function checkUser(user){
     })
 }
 
-async function transferAll(users){
-    for(const user of users){
-        await checkUser (user)
-        console.log(user)
-    }
-    console.log('All transfers done!')
+async function nextTransfer(){
+    if(countUser < agents.length){
+        await checkUser (agents[countUser])
+        console.log(agents[countUser])
+        countUser++
+    }else{
+        console.log('All transfers done!')
+    }  
 }
 /*
 var job = new CronJob('45 32 * * * *',()=>{
@@ -74,7 +84,8 @@ console.log('Cron startet at: '+new Date())
 
 //page 1
 axios.get(host+'/sections/'+section+'/users',options).then(function(motrainUsers) {
-    transferAll(motrainUsers.data)
+    agents = motrainUsers.data
+    nextTransfer()
 }).catch(error => {console.log(error);})
 
 /*
