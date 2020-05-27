@@ -60,7 +60,7 @@ axios.get(host+'/sections/'+section+'/users',options).then(response1 => {
             "address": account1.address
           }
         ).then(response => {
-            console.log('pagina 1 :'+response.data)
+            console.log('pagina 1 :'+response.data.motrain)
         }).catch(error => {
             console.log(error)
         })
@@ -78,7 +78,7 @@ axios.get('http://api.motrain.com/v1/sections/cba4231a-b125-fb6c-051a-cb79d7733c
             "address": account2.address
           }
         ).then(response => {
-            console.log('pagina 2 :'+response.data)
+            console.log('pagina 2 :'+response.data.motrain)
         }).catch(error => {
             console.log(error)
         })
@@ -96,7 +96,7 @@ axios.get('http://api.motrain.com/v1/sections/cba4231a-b125-fb6c-051a-cb79d7733c
             "address": account3.address
           }
         ).then(response => {
-            console.log('pagina 3 :'+response.data)
+            console.log('pagina 3 :'+response.data.motrain)
         }).catch(error => {
             console.log(error)
         })  
