@@ -61,14 +61,10 @@ axios.get(host+'/sections/'+section+'/users',options).then(response1 => {
             "address": account1.address
           }
         ).then(response => {
-            balance.balanceOf(response.data.address).then(b => {
-                if(0 < b < response1.data.coins) {
-                    console.log('Morain coins'+response1.data.coins)
-                    console.log('BC coins'+b)
-                }
+                    console.log('Address '+response.address)
+                    console.log('Motrain coins'+response1.data[i].coins)
             }
-            )
-        }).catch(error => {
+        ).catch(error => {
             console.log(error)
         })
     }
