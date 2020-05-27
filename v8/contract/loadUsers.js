@@ -1,12 +1,7 @@
-const balance = require ('./balance')
-const CronJob = require ('cron').CronJob
-const events = require ('events')
-const tr = require('./transaction')
+
 const contract =require('./contract')
 const Web3 = require('web3')
 const web3 = new Web3(contract.url)
-const Web3Contract = new web3.eth.Contract(contract.ABI,contract.address)
-const eventEmitter = new events.EventEmitter()
 const axios = require('axios')
 const credentials = require('./credentials')
 const bearer = credentials.bearer
@@ -23,33 +18,6 @@ function createAccount () {
     return web3.eth.accounts.create()
 }
 
-function transference(from, pk, to, amount){
-    tr.transaction(
-        web3,
-        contract.address,
-        from,
-        pk,
-        Web3Contract.methods.transfer(to,amount).encodeABI()
-    ).then(result => {
-        console.log(result)
-        eventEmitter.emit(result)
-        }
-    ).catch(error => {
-        console.log(error)
-    })
-}
-
-/*
-eventEmitter.on(true,transference())
-
-var job = new CronJob('45 32 * * * *',()=>{
-    eventEmitter.emit(true)
-})
-job.start()
-console.log('Cron startet at: '+new Date())
-*/
-
-
 //page 1
 axios.get(host+'/sections/'+section+'/users',options).then(response1 => {
     for (var i = 0 in response1.data){
@@ -61,13 +29,7 @@ axios.get(host+'/sections/'+section+'/users',options).then(response1 => {
             "address": account1.address
           }
         ).then(response => {
-            balance.balanceOf(response.data.address).then(b => {
-                if(0 < b < response1.data.coins) {
-                    console.log('Morain coins'+response1.data.coins)
-                    console.log('BC coins'+b)
-                }
-            }
-            )
+            console.log('pagina 1 :'+response.data.motrain)
         }).catch(error => {
             console.log(error)
         })
