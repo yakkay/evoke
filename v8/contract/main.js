@@ -54,6 +54,7 @@ console.log('Cron startet at: '+new Date())
 axios.get(host+'/sections/'+section+'/users',options).then(response1 => {
     for (var i = 0 in response1.data){
         var account1 = createAccount()
+        console.log('sent motrain id '+response1.data[i].id)
         axios.post('http://172.18.0.16:3000/create-mootivated-bc-users/',
           {
             "motrain": response1.data[i].id,
