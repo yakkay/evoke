@@ -1,9 +1,9 @@
 const Tx = require('ethereumjs-tx')
 
 exports.transaction = function(web3,contract_address,sender,privatekey,method){ 
-        return new Promise ((resolve,reject)=>{
+        return new Promise (function(resolve,reject){
             console.log('sender: '+sender)
-            web3.eth.getTransactionCount(sender,(err,txCount)=>{
+            web3.eth.getTransactionCount(sender,function(err,txCount){
                 console.log('TxCount: '+txCount)
                 if(err){console.log('error count ',err)}
                 const txObject = {
@@ -17,11 +17,11 @@ exports.transaction = function(web3,contract_address,sender,privatekey,method){
                 tx.sign(Buffer.from(privatekey,'hex'))
                     const serializedTx = tx.serialize()
                     const raw = '0x'+serializedTx.toString('hex')
-                    web3.eth.sendSignedTransaction(raw,(err,txHash)=>{
+                    web3.eth.sendSignedTransaction(raw,function(err,txHash){
                         if(err){
                             return reject("Error al enviar la transacción")
                         }
-                    }).on('receipt',(receipt)=>{
+                    }).on('receipt',function(receipt){
                         return resolve (receipt.status)
                     })
             })

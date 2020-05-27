@@ -1,4 +1,5 @@
 const CronJob = require ('cron').CronJob
+const Queue = require ('better-queue')
 const balance = require ('./balance')
 const tr = require('./transaction')
 const contract =require('./contract')
@@ -23,24 +24,50 @@ function createAccount () {
     return web3.eth.accounts.create()
 }
 
-function transference(from, pk, to, amount){
-    tr.transaction(
+async function transference(from, pk, to, amount){
+    await  tr.transaction(
         web3,
         contract.address,
         from,
         pk,
         Web3Contract.methods.transfer(to,amount).encodeABI()
     ).then(result => {
-        console.log(result)
-        eventEmitter.emit(result)
+        console.log ('Transfer success: '+result)
         }
     ).catch(error => {
+        console.log (error)
+    })
+}
+
+async function checkUser(user){
+    let account = createAccount()
+    axios.post('http://172.18.0.16:3000/create-mootivated-bc-users/',
+      {
+        "motrain": user.id,
+        "pv_key": account.privateKey,
+        "address": account.address
+      }
+    ).then(function (storedAccount) {
+        let address = storedAccount.data.address
+        console.log(address)
+        balance.balanceOf(address).then(function(blockchainBalance){
+            if(0 < blockchainBalance < user.coins) {
+                let amount = user.coins-blockchainBalance
+                transference(owner,ownerPk,address,amount)
+            }
+        })
+    }).catch(function(error) {
         console.log(error)
     })
 }
 
+async function transferAll(users){
+    for(const user of users){
+        await checkUser (user)
+    }
+    console.log('All transfers done!')
+}
 /*
-
 var job = new CronJob('45 32 * * * *',()=>{
     eventEmitter.emit(true)
 })
@@ -50,26 +77,8 @@ console.log('Cron startet at: '+new Date())
 
 
 //page 1
-axios.get(host+'/sections/'+section+'/users',options).then(response1 => {
-    response1.data.forEach(element => {
-        let account = createAccount()
-        axios.post('http://172.18.0.16:3000/create-mootivated-bc-users/',
-          {
-            "motrain": element.id,
-            "pv_key": account.privateKey,
-            "address": account.address
-          }
-        ).then(function (response) {
-            console.log(response.data.address)
-            balance.balanceOf(response.data.address).then(function(b){
-                if(0 < b < element.coins) {
-                    transference(owner,ownerPk,response.data.address,element.coins-b)
-                }
-            })
-        }).catch(function(error) {
-            console.log(error)
-        })
-    })
+axios.get(host+'/sections/'+section+'/users',options).then(function(motrainUsers) {
+    transferAll(motrainUsers.data)
 }).catch(error => {console.log(error);})
 
 /*
