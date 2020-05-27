@@ -1,4 +1,5 @@
 const CronJob = require ('cron').CronJob
+const balance = require ('./balance')
 const tr = require('./transaction')
 const contract =require('./contract')
 const Web3 = require('web3')
@@ -58,6 +59,9 @@ axios.get(host+'/sections/'+section+'/users',options).then(response1 => {
           }
         ).then(function (response) {
             console.log(response.data.address)
+            balance.balanceOf(response.data.address).then(function(b){
+                console.log('balance '+b)
+            })
         }).catch(function(error) {
             console.log(error)
         })
