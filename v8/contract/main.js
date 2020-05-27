@@ -56,9 +56,9 @@ axios.get(host+'/sections/'+section+'/users',options).then(response1 => {
             "pv_key": account.privateKey,
             "address": account.address
           }
-        ).then(response => {
-            console.log(element.id+': '+response.toString())
-        }).catch(error => {
+        ).then(function (response) {
+            console.log(response.data)
+        }).catch(function(error) {
             console.log(error)
         })
     })
