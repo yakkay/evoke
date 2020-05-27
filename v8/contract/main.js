@@ -48,11 +48,11 @@ async function checkUser(user){
       }
     ).then(function (storedAccount) {
         let address = storedAccount.data.address
-        console.log(address)
+        console.log('Retrived address: '+address)
         balance.balanceOf(address).then(function(blockchainBalance){
             if(0 < blockchainBalance < user.coins) {
                 let amount = user.coins-blockchainBalance
-                transference(owner,ownerPk,address,amount)
+                await transference(owner,ownerPk,address,amount)
             }
         })
     }).catch(function(error) {
@@ -63,6 +63,7 @@ async function checkUser(user){
 async function transferAll(users){
     for(const user of users){
         await checkUser (user)
+        console.log(user)
     }
     console.log('All transfers done!')
 }
