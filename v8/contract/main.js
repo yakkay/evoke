@@ -1,12 +1,9 @@
-const balance = require ('./balance')
 const CronJob = require ('cron').CronJob
-const events = require ('events')
 const tr = require('./transaction')
 const contract =require('./contract')
 const Web3 = require('web3')
 const web3 = new Web3(contract.url)
 const Web3Contract = new web3.eth.Contract(contract.ABI,contract.address)
-const eventEmitter = new events.EventEmitter()
 const axios = require('axios')
 const credentials = require('./credentials')
 const bearer = credentials.bearer
@@ -40,7 +37,6 @@ function transference(from, pk, to, amount){
 }
 
 /*
-eventEmitter.on(true,transference())
 
 var job = new CronJob('45 32 * * * *',()=>{
     eventEmitter.emit(true)
@@ -52,23 +48,20 @@ console.log('Cron startet at: '+new Date())
 
 //page 1
 axios.get(host+'/sections/'+section+'/users',options).then(response1 => {
-    for (var i = 0 in response1.data){
-        var account1 = createAccount()
-        console.log('sent motrain id '+response1.data[i].id)
+    response1.data.forEach(element => {
+        let account = createAccount()
         axios.post('http://172.18.0.16:3000/create-mootivated-bc-users/',
           {
-            "motrain": response1.data[i].id,
-            "pv_key": account1.privateKey,
-            "address": account1.address
+            "motrain": element.id,
+            "pv_key": account.privateKey,
+            "address": account.address
           }
         ).then(response => {
-                    console.log('Address '+response.address)
-                    console.log('Motrain coins'+response1.data[i].coins)
-            }
-        ).catch(error => {
+            console.log(element.id+': '+element.address)
+        }).catch(error => {
             console.log(error)
         })
-    }
+    })
 }).catch(error => {console.log(error);})
 
 /*
