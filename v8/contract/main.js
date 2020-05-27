@@ -34,7 +34,7 @@ async function checkUser(user){
     ).then(async function (storedAccount) {
         let agentAddress = storedAccount.data.address
         console.log('Retrived address: '+agentAddress)
-        balance.balanceOf(agentAddress).then(function(blockchainBalance){
+        balance.balanceOf(agentAddress).then(async function(blockchainBalance){
             if(0 < blockchainBalance < user.coins) {
                 let amount = user.coins-blockchainBalance
                 await tr.transaction(

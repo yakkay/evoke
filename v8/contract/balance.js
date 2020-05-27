@@ -15,6 +15,7 @@ exports.balanceOf = function (from) {
     })
 }
 
+
 /*
 balanceOf('0xE401862558e44fa2547b66a6C1D50c8492718997').then(result => {
     console.log(result+' EVC')
