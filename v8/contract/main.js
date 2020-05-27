@@ -10,7 +10,7 @@ const credentials = require('./credentials')
 const bearer = credentials.bearer
 const host= credentials.host
 const section = credentials.section
-const owner = credentials.owner
+const ownerAddress = credentials.owner
 const ownerPk = credentials.ownerPk
 const options = {
     headers: {
@@ -23,21 +23,6 @@ function createAccount () {
     return web3.eth.accounts.create()
 }
 
-async function transference(from, pk, to, amount){
-    await  tr.transaction(
-        web3,
-        contract.address,
-        from,
-        pk,
-        Web3Contract.methods.transfer(to,amount).encodeABI()
-    ).then(result => {
-        console.log ('Transfer success: '+result)
-        }
-    ).catch(error => {
-        console.log (error)
-    })
-}
-
 async function checkUser(user){
     let account = createAccount()
     axios.post('http://172.18.0.16:3000/create-mootivated-bc-users/',
@@ -47,12 +32,23 @@ async function checkUser(user){
         "address": account.address
       }
     ).then(function (storedAccount) {
-        let address = storedAccount.data.address
-        console.log('Retrived address: '+address)
-        balance.balanceOf(address).then(function(blockchainBalance){
+        let agentAddress = storedAccount.data.address
+        console.log('Retrived address: '+agentAddress)
+        balance.balanceOf(agentAddress).then(function(blockchainBalance){
             if(0 < blockchainBalance < user.coins) {
                 let amount = user.coins-blockchainBalance
-                await transference(owner,ownerPk,address,amount)
+                await tr.transaction(
+                    web3,
+                    contract.address,
+                    ownerAddress,
+                    ownerPk,
+                    Web3Contract.methods.transfer(agentAddress,amount).encodeABI()
+                ).then(result => {
+                    console.log ('Transfer success: '+result)
+                    }
+                ).catch(error => {
+                    console.log (error)
+                })
             }
         })
     }).catch(function(error) {
