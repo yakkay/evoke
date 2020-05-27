@@ -7,8 +7,11 @@ function createAccount () {
 }
 
 var account1 = createAccount()
+var account2 = createAccount()
 console.log(
-    'account1 '+account1,
-    ' address '+account1.address,
-    ' pk '+account1.privateKey
+    ' address '+account1.address+'\n',
+    ' pk '+account1.privateKey+'\n',
+    ' address '+account2.address+'\n',
+    ' pk '+account2.privateKey+'\n',
+
 )
