@@ -68,7 +68,7 @@ axios.get(host+'/sections/'+section+'/users',options).then(response1 => {
             console.log(error)
         })
     }
-}).catch(error => {console.log(error);}).finally
+}).catch(error => {console.log(error);})
 
 /*
 //page 2
