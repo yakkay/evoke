@@ -1,5 +1,4 @@
 const CronJob = require ('cron').CronJob
-const Queue = require ('better-queue')
 const balance = require ('./balance')
 const tr = require('./transaction')
 const contract =require('./contract')
