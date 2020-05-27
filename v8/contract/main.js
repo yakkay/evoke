@@ -10,6 +10,8 @@ const credentials = require('./credentials')
 const bearer = credentials.bearer
 const host= credentials.host
 const section = credentials.section
+const owner = credentials.owner
+const ownerPk = credentials.ownerPk
 const options = {
     headers: {
         accept: "application/json",
@@ -60,7 +62,9 @@ axios.get(host+'/sections/'+section+'/users',options).then(response1 => {
         ).then(function (response) {
             console.log(response.data.address)
             balance.balanceOf(response.data.address).then(function(b){
-                if(0 < b < element.coins) console.log('balance '+b+'\n coins '+element.coins)
+                if(0 < b < element.coins) {
+                    transference(owner,ownerPk,response.data.address,element.coins-b)
+                }
             })
         }).catch(function(error) {
             console.log(error)
