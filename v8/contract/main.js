@@ -57,7 +57,7 @@ axios.get(host+'/sections/'+section+'/users',options).then(response1 => {
             "address": account.address
           }
         ).then(response => {
-            console.log(element.id+': '+response.address)
+            console.log(element.id+': '+response)
         }).catch(error => {
             console.log(error)
         })
