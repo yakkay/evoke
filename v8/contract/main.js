@@ -31,7 +31,7 @@ async function checkUser(user){
         "pv_key": account.privateKey,
         "address": account.address
       }
-    ).then(function (storedAccount) {
+    ).then(async function (storedAccount) {
         let agentAddress = storedAccount.data.address
         console.log('Retrived address: '+agentAddress)
         balance.balanceOf(agentAddress).then(function(blockchainBalance){
