@@ -42,7 +42,7 @@ async function getMotrainUsers(page) {
 async function payToNextAgent(){ 
     const agent = agents[currentUser]
     await checkUser(agent.id)
-    .then((agentAccount) => {
+    .then(async function(agentAccount) {
         await transfer(agentAccount,agent.coins)
         .catch((error) => console.log(error))
         console.log(agent)
