@@ -41,9 +41,11 @@ async function getMotrainUsers(page) {
 
 async function payToNextAgent(){ 
     const agent = agents[currentUser]
-    checkUser(agent.id)
-    .then(function(agentAccount) {
-        transfer(agentAccount,agent.coins)
+    await checkUser(agent.id)
+    .then( async function(agentAccount) {
+        console.log('Retrieved account: '+agentAccount)
+        await transfer(agentAccount,agent.coins)
+        .then((result)=>console.log('Transfer completed: '+result))
         .catch((error) => console.log(error))
         console.log(agent)
         currentUser++
@@ -75,13 +77,13 @@ async function checkUser(motrainUserID){
         "address": account.address
       }
     ).then(function(userAccount) {
-        console.log('Retrieved address: '+userAccount.data.address)
+        console.log('Check User success')
         userAccount = userAccount.data
         return userAccount
     }).catch((error) => console.log(error))
 }
 
-function transfer(agentAccount,agentCoins) {
+async function transfer(agentAccount,agentCoins) {
     balance.balanceOf(agentAccount.address)
     .then(async function(AgentBlockchainBalance){
         if (AgentBlockchainBalance == agentCoins) payToNextAgent()
@@ -96,7 +98,8 @@ function transfer(agentAccount,agentCoins) {
                 Web3Contract.methods.transfer(agentAccount.address,amount).encodeABI()
             ).then(result => {
                 payToNextAgent()
-                console.log ('Payment Transfer success: '+result)
+                console.log ('Transfer status: '+result)
+                return result
                 }
             ).catch(error => console.log (error))
         }if(AgentBlockchainBalance > agentCoins){
@@ -110,7 +113,8 @@ function transfer(agentAccount,agentCoins) {
                 Web3Contract.methods.transfer(EVCredeemedAddres,amount).encodeABI()
             ).then(result => {
                 payToNextAgent()
-                console.log ('Redemption transfer success: '+result)
+                console.log ('Redemption status: '+result)
+                return result
                 }
             ).catch(error => console.log (error))
         }
