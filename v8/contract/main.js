@@ -80,7 +80,7 @@ async function checkUser(motrainUserID){
     }).catch((error) => console.log(error))
 }
 
-async function transfer(agentAccount,agentCoins) {
+function transfer(agentAccount,agentCoins) {
     balance.balanceOf(agentAccount.address)
     .then(async function(AgentBlockchainBalance){
         if (AgentBlockchainBalance == agentCoins) payToNextAgent()
