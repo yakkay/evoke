@@ -44,7 +44,7 @@ function payToNextAgent(){
      checkUser(agent.id).then(function(agentAccount) {
         console.log('Retrieved account: '+agentAccount.address)
         transfer(agentAccount,agent.coins)
-        .then((result)=>console.log('Transfer completed: '+result))
+        .then((result)=>console.log('Transfer verified'))
         .catch((error) => console.log(error))
         console.log(agent)
         currentUser++
@@ -89,8 +89,8 @@ async function transfer(agentAccount,agentCoins) {
     balance.balanceOf(agentAccount.address)
     .then(async function(AgentBlockchainBalance){
         if (AgentBlockchainBalance == agentCoins) {
+            console.log ('Transfer status: not needed')
             payToNextAgent()
-            return 'not need'
         }
         if(AgentBlockchainBalance < agentCoins){
             const amount = agentCoins-AgentBlockchainBalance
@@ -99,12 +99,11 @@ async function transfer(agentAccount,agentCoins) {
                 contract.address,
                 ownerAddress,
                 ownerPk,
-                0,002,
+                '0,002',
                 Web3Contract.methods.transfer(agentAccount.address,amount).encodeABI()
             ).then(result => {
-                payToNextAgent()
                 console.log ('Transfer status: '+result)
-                return result
+                payToNextAgent()
                 }
             ).catch(error => console.log (error))
         }if(AgentBlockchainBalance > agentCoins){
@@ -114,12 +113,11 @@ async function transfer(agentAccount,agentCoins) {
                 contract.address,
                 agentAccount.address,
                 agentAccount.pv_key,
-                0,000,
+                '0',
                 Web3Contract.methods.transfer(EVCredeemedAddres,amount).encodeABI()
             ).then(result => {
-                payToNextAgent()
                 console.log ('Redemption status: '+result)
-                return result
+                payToNextAgent()
                 }
             ).catch(error => console.log (error))
         }
