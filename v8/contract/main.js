@@ -42,12 +42,12 @@ async function getMotrainUsers(page) {
 function payToNextAgent(){ 
     console.log('------------------------------------')
     const agent = agents[currentUser]
+    console.log(agent)
      checkUser(agent.id).then(function(agentAccount) {
         console.log('Retrieved address: '+agentAccount.address)
         transfer(agentAccount,agent.coins)
         .then((result)=>console.log('Transfer verified'))
         .catch((error) => console.log(error))
-        console.log(agent)
         currentUser++
         if(currentUser === agents.length) {
             switch (currentPage) {
