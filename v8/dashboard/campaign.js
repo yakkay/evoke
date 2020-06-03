@@ -1,4 +1,3 @@
-const motrain =  require('./motrain')
 const express = require('express')
 const router = express.Router()
 const balance = require ('../contract/balance')
