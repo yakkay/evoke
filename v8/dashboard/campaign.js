@@ -51,6 +51,24 @@ router.get('/',(req,res)=>{
                         EVC: 1000000,
                         COP: 10000,
                         allocated:440
+                    },
+                    {
+                        name: "Novela gráfica: Episodio 1",
+                        EVC: 250000,
+                        COP: 0,
+                        allocated:0
+                    },
+                    {
+                        name: "Novela gráfica: Episodio 2",
+                        EVC: 250000,
+                        COP: 0,
+                        allocated:0
+                    },
+                    {
+                        name: "Novela gráfica: Tráfico de personas",
+                        EVC: 250000,
+                        COP: 0,
+                        allocated:0
                     }
                 ]
             })
