@@ -41,26 +41,29 @@ async function getMotrainUsers(page) {
 
 async function payToNextAgent(){ 
     const agent = agents[currentUser]
-    const agentAccount = await checkUser(agent.id)
-    await transfer(agentAccount,agent.coins)
-    console.log(agent)
-    currentUser++
-    if(currentUser === agents.length) {
-        switch (currentPage) {
-            case 0:
-                getMotrainUsers(motrainUsersPage1)
-                break
-            case 1:
-                getMotrainUsers(motrainUsersPage2)
-                break
-            case 2:
-                getMotrainUsers(motrainUsersPage3)
-                break
-            default:
-                currentPage = 0
-                getMotrainUsers(motrainUsersPage1)   
+    await checkUser(agent.id)
+    .then((agentAccount) => {
+        await transfer(agentAccount,agent.coins)
+        .catch((error) => console.log(error))
+        console.log(agent)
+        currentUser++
+        if(currentUser === agents.length) {
+            switch (currentPage) {
+                case 0:
+                    getMotrainUsers(motrainUsersPage1)
+                    break
+                case 1:
+                    getMotrainUsers(motrainUsersPage2)
+                    break
+                case 2:
+                    getMotrainUsers(motrainUsersPage3)
+                    break
+                default:
+                    currentPage = 0
+                    getMotrainUsers(motrainUsersPage1)   
+            }
         }
-    }
+    }).catch((error) => console.log(error))
 }
 
 async function checkUser(motrainUserID){
