@@ -1,4 +1,5 @@
 
+const credentials = require('./credentials')
 const balance = require ('./balance')
 const tr = require('./transaction')
 const contract =require('./contract')
@@ -6,7 +7,6 @@ const Web3 = require('web3')
 const web3 = new Web3(credentials.ropstenURL)
 const Web3Contract = new web3.eth.Contract(contract.ABI,contract.address)
 const axios = require('axios')
-const credentials = require('./credentials')
 const bearer = credentials.bearer
 const host= credentials.host
 const section = credentials.section
