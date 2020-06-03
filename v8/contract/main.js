@@ -68,7 +68,7 @@ async function payToNextAgent(){
 
 async function checkUser(motrainUserID){
     const account = web3.eth.accounts.create()
-    await axios.post(usersVaultHost+'/create-mootivated-bc-users/',
+    axios.post(usersVaultHost+'/create-mootivated-bc-users/',
       {
         "motrain": motrainUserID,
         "pv_key": account.privateKey,
@@ -76,7 +76,8 @@ async function checkUser(motrainUserID){
       }
     ).then(function(userAccount) {
         console.log('Retrieved address: '+userAccount.data.address)
-        return userAccount.data
+        userAccount = userAccount.data
+        return userAccount
     }).catch((error) => console.log(error))
 }
 
