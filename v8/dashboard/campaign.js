@@ -16,7 +16,7 @@ balance.TotalSupply()
 .catch((error) => console.log(error))
 
 router.get('/',(req,res)=>{
-    await campaignRemaining()
+    campaignRemaining()
         res.json(
             {
                 address: contract.address,
