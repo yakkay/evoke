@@ -42,7 +42,7 @@ async function getMotrainUsers(page) {
 function payToNextAgent(){ 
     const agent = agents[currentUser]
      checkUser(agent.id).then(function(agentAccount) {
-        console.log('Retrieved account: '+agentAccount)
+        console.log('Retrieved account: '+agentAccount.address)
         transfer(agentAccount,agent.coins)
         .then((result)=>console.log('Transfer completed: '+result))
         .catch((error) => console.log(error))
@@ -88,7 +88,10 @@ function checkUser(motrainUserID){
 async function transfer(agentAccount,agentCoins) {
     balance.balanceOf(agentAccount.address)
     .then(async function(AgentBlockchainBalance){
-        if (AgentBlockchainBalance == agentCoins) payToNextAgent()
+        if (AgentBlockchainBalance == agentCoins) {
+            payToNextAgent()
+            return 'not need'
+        }
         if(AgentBlockchainBalance < agentCoins){
             const amount = agentCoins-AgentBlockchainBalance
             await tr.transaction(
@@ -96,7 +99,7 @@ async function transfer(agentAccount,agentCoins) {
                 contract.address,
                 ownerAddress,
                 ownerPk,
-                '0,002',
+                0,002,
                 Web3Contract.methods.transfer(agentAccount.address,amount).encodeABI()
             ).then(result => {
                 payToNextAgent()
@@ -111,7 +114,7 @@ async function transfer(agentAccount,agentCoins) {
                 contract.address,
                 agentAccount.address,
                 agentAccount.pv_key,
-                '0,000',
+                0,000,
                 Web3Contract.methods.transfer(EVCredeemedAddres,amount).encodeABI()
             ).then(result => {
                 payToNextAgent()
