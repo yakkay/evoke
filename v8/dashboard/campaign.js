@@ -5,7 +5,7 @@ const balance = require ('../contract/balance')
 const credentials = require('../contract/credentials')
 const contract =require('../contract/contract')
 const ownerAddress = credentials.owner
-const allocation 
+var allocation 
 var reamainingOfCampaign 
 var consumed 
 var redeemed 
