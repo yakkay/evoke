@@ -91,7 +91,7 @@ async function transfer(agentAccount,agentCoins) {
     .then(async function(AgentBlockchainBalance){
         if (AgentBlockchainBalance == agentCoins) {
             console.log ('Transfer status: not needed')
-            setTimeout(payToNextAgent(),1000)
+            setTimeout(payToNextAgent,1000)
         }
         if(AgentBlockchainBalance < agentCoins){
             const amount = agentCoins-AgentBlockchainBalance
@@ -104,7 +104,7 @@ async function transfer(agentAccount,agentCoins) {
                 Web3Contract.methods.transfer(agentAccount.address,amount).encodeABI()
             ).then(result => {
                 console.log ('Transfer status: '+result)
-                setTimeout(payToNextAgent(),1000)
+                setTimeout(payToNextAgent,1000)
                 }
             ).catch(error => console.log (error))
         }if(AgentBlockchainBalance > agentCoins){
@@ -118,7 +118,7 @@ async function transfer(agentAccount,agentCoins) {
                 Web3Contract.methods.transfer(EVCredeemedAddres,amount).encodeABI()
             ).then(result => {
                 console.log ('Redemption status: '+result)
-                setTimeout(payToNextAgent(),1000)
+                setTimeout(payToNextAgent,1000)
                 }
             ).catch(error => console.log (error))
         }
