@@ -41,8 +41,7 @@ async function getMotrainUsers(page) {
 
 function payToNextAgent(){ 
     const agent = agents[currentUser]
-     checkUser(agent.id)
-    .then(function(agentAccount) {
+     checkUser(agent.id).then(function(agentAccount) {
         console.log('Retrieved account: '+agentAccount)
         transfer(agentAccount,agent.coins)
         .then((result)=>console.log('Transfer completed: '+result))
@@ -70,17 +69,20 @@ function payToNextAgent(){
 
 function checkUser(motrainUserID){
     const account = web3.eth.accounts.create()
-    axios.post(usersVaultHost+'/create-mootivated-bc-users/',
-      {
-        "motrain": motrainUserID,
-        "pv_key": account.privateKey,
-        "address": account.address
-      }
-    ).then(function(userAccount) {
-        console.log('Check User success')
-        userAccount = userAccount.data
-        return userAccount
-    }).catch((error) => console.log(error))
+    return new Promise (function(resolve,reject){
+        axios.post(usersVaultHost+'/create-mootivated-bc-users/',
+        {
+          "motrain": motrainUserID,
+          "pv_key": account.privateKey,
+          "address": account.address
+        }
+      ).then(function(userAccount) {
+          console.log('Check User success')
+          return resolve(userAccount.data)
+      }).catch((error) => {
+          return reject(error)
+        })
+    })
 }
 
 async function transfer(agentAccount,agentCoins) {
