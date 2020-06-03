@@ -1,50 +1,5 @@
-module.exports.address = process.env.evcAddress || '0x41E302D16DeEe2E872561A672EDF85EC9d8F33F0';//'0x02d7eebb94050ed2Ef3b9a1399a6a4F0754Bd6a7';
-module.exports.url = process.env.evcURLcontract || 'https://ropsten.infura.io/v3/2516d9bfa9894fd79838a4df6611801d';
-module.exports.ABI = [
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "from",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "spender",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "value",
-				"type": "uint256"
-			}
-		],
-		"name": "Approval",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "player",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "value",
-				"type": "uint256"
-			}
-		],
-		"name": "Pay_reward",
-		"type": "event"
-	},
+exports.address = '0x2AEe87D1560AB9Dd0756fF78422C247B218911B1';
+exports.ABI = [
 	{
 		"anonymous": false,
 		"inputs": [
@@ -71,7 +26,6 @@ module.exports.ABI = [
 		"type": "event"
 	},
 	{
-		"constant": false,
 		"inputs": [
 			{
 				"internalType": "address",
@@ -92,74 +46,10 @@ module.exports.ABI = [
 				"type": "bool"
 			}
 		],
-		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
-		"constant": false,
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "mission_id",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "score",
-				"type": "uint256"
-			},
-			{
-				"internalType": "address",
-				"name": "user",
-				"type": "address"
-			}
-		],
-		"name": "pay_mission_score_user",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "mission_id",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "score",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "reward",
-				"type": "uint256"
-			}
-		],
-		"name": "set_mission_score_reward",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
 		"inputs": [
 			{
 				"internalType": "address",
@@ -180,12 +70,10 @@ module.exports.ABI = [
 				"type": "bool"
 			}
 		],
-		"payable": true,
 		"stateMutability": "payable",
 		"type": "function"
 	},
 	{
-		"constant": false,
 		"inputs": [
 			{
 				"internalType": "address",
@@ -211,7 +99,6 @@ module.exports.ABI = [
 				"type": "bool"
 			}
 		],
-		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
@@ -223,12 +110,10 @@ module.exports.ABI = [
 				"type": "uint256"
 			}
 		],
-		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "constructor"
 	},
 	{
-		"constant": true,
 		"inputs": [
 			{
 				"internalType": "address",
@@ -249,12 +134,10 @@ module.exports.ABI = [
 				"type": "uint256"
 			}
 		],
-		"payable": false,
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"constant": true,
 		"inputs": [
 			{
 				"internalType": "address",
@@ -270,12 +153,10 @@ module.exports.ABI = [
 				"type": "uint256"
 			}
 		],
-		"payable": false,
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"constant": true,
 		"inputs": [],
 		"name": "decimals",
 		"outputs": [
@@ -285,12 +166,10 @@ module.exports.ABI = [
 				"type": "uint8"
 			}
 		],
-		"payable": false,
 		"stateMutability": "pure",
 		"type": "function"
 	},
 	{
-		"constant": true,
 		"inputs": [],
 		"name": "Decimals",
 		"outputs": [
@@ -300,38 +179,10 @@ module.exports.ABI = [
 				"type": "uint8"
 			}
 		],
-		"payable": false,
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"constant": true,
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "mission_id",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "score",
-				"type": "uint256"
-			}
-		],
-		"name": "get_mission_score_reward",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
 		"inputs": [],
 		"name": "name",
 		"outputs": [
@@ -341,12 +192,10 @@ module.exports.ABI = [
 				"type": "string"
 			}
 		],
-		"payable": false,
 		"stateMutability": "pure",
 		"type": "function"
 	},
 	{
-		"constant": true,
 		"inputs": [],
 		"name": "Name",
 		"outputs": [
@@ -356,12 +205,29 @@ module.exports.ABI = [
 				"type": "string"
 			}
 		],
-		"payable": false,
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"constant": true,
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			}
+		],
+		"name": "redeemedOf",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "symbol",
 		"outputs": [
@@ -371,12 +237,10 @@ module.exports.ABI = [
 				"type": "string"
 			}
 		],
-		"payable": false,
 		"stateMutability": "pure",
 		"type": "function"
 	},
 	{
-		"constant": true,
 		"inputs": [],
 		"name": "Symbol",
 		"outputs": [
@@ -386,12 +250,10 @@ module.exports.ABI = [
 				"type": "string"
 			}
 		],
-		"payable": false,
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"constant": true,
 		"inputs": [],
 		"name": "totalSupply",
 		"outputs": [
@@ -401,8 +263,8 @@ module.exports.ABI = [
 				"type": "uint256"
 			}
 		],
-		"payable": false,
 		"stateMutability": "view",
 		"type": "function"
 	}
 ];
+	
