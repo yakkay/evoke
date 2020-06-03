@@ -30,7 +30,7 @@ exports.redeemedOf = function (address) {
 
 exports.TotalSupply = function() {
     return new Promise((resolve,reject) => {
-        Web3Contract.methods.TotalSupply.call((error,total) => {
+        Web3Contract.methods.totalSupply().call((error,total) => {
             if(error) {
                 return reject(error)
             } else {
