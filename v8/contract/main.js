@@ -42,7 +42,7 @@ async function getMotrainUsers(page) {
 function payToNextAgent(){ 
     const agent = agents[currentUser]
      checkUser(agent.id).then(function(agentAccount) {
-        console.log('Retrieved account: '+agentAccount.address)
+        console.log('Retrieved address: '+agentAccount.address)
         transfer(agentAccount,agent.coins)
         .then((result)=>console.log('Transfer verified'))
         .catch((error) => console.log(error))
@@ -99,7 +99,7 @@ async function transfer(agentAccount,agentCoins) {
                 contract.address,
                 ownerAddress,
                 ownerPk,
-                '0,002',
+                '0.002',
                 Web3Contract.methods.transfer(agentAccount.address,amount).encodeABI()
             ).then(result => {
                 console.log ('Transfer status: '+result)
