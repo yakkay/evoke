@@ -27,7 +27,7 @@ var currentPage = 0
 var currentUser
 var agents
 
-getMotrainUsers(motrainUsersPage1)
+getMotrainUsers(motrainUsersPage2)
 
 async function getMotrainUsers(page) {
     currentUser = 0
@@ -108,7 +108,7 @@ async function transfer(agentAccount,agentCoins) {
                 setTimeout(payToNextAgent,3000)
                 }
             ).catch(error => console.log (error))
-        }if(AgentBlockchainBalance > agentCoins){
+        }/*if(AgentBlockchainBalance > agentCoins){
             const amount = AgentBlockchainBalance - agentCoins
             await tr.transaction(
                 web3,
@@ -122,6 +122,6 @@ async function transfer(agentAccount,agentCoins) {
                 setTimeout(payToNextAgent,3000)
                 }
             ).catch(error => console.log (error))
-        }
+        }*/
     }).catch((error) => console.log(error))
 }
