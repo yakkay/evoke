@@ -1,22 +1,32 @@
+const axios = require('axios')
 const express = require('express')
 const router = express.Router()
 const balance = require ('../contract/balance')
 const credentials = require('../contract/credentials')
 const contract =require('../contract/contract')
 const ownerAddress = credentials.owner
-var allocation 
-var reamainingOfCampaign 
-var consumed 
-var redeemed 
+const host= credentials.host
+const section = credentials.section
+const productListURL = `${host}/sections/${section}/items`
+const bearer = credentials.bearer
+const options = {
+    headers: {
+        accept: "application/json",
+        Authorization: bearer,
+    }
+}
+var allocation = 880000000
+var redeemed = 0
 router.use(express.json());
 
 balance.TotalSupply()
 .then((total) => allocation = total)
 .catch((error) => console.log(error))
 
-router.get('/',(req,res)=>{
-    campaignRemaining()
-        res.json(
+router.get('/',async (request,response)=>{
+    await campaignRemaining()
+    .then((campaignBalance) =>{
+        response.json(
             {
                 address: contract.address,
                 name: "Ciudades Sostenibles piloto EAN",
@@ -26,12 +36,12 @@ router.get('/',(req,res)=>{
                 token: "EVC",
                 startDate: "20/03/2020",
                 endDate: "30/05/2020",
-                usedBudget:consumed,
+                usedBudget:campaignBalance[1],
                 Budget:{
                     allocated: allocation,
-                    students:consumed,
+                    students:campaignBalance[1],
                     mentor:0,
-                    reamaining: reamainingOfCampaign,
+                    reamaining: campaignBalance[0],
                     redeemed
                 },
                 users:{
@@ -72,20 +82,38 @@ router.get('/',(req,res)=>{
                     }
                 ]
             })
+    }
+    )
+    .catch((error) => Console.log(error))
 });
 
-async function campaignRemaining() {
-    balance.balanceOf(ownerAddress)
-    .then((balance) => {
-        reamainingOfCampaign = balance
-        consumed = allocation - reamainingOfCampaign
-    })
-    .catch((error) => console.log(error))
+router.get('/donations',async (request,response) => {
+    await getProducts()
+    .then((products) =>{
+        response.json(products)
+    }).catch((error) => console.log(error))
+})
 
-    balance.redeemedOf(credentials.redeemedAddress)
-    .then((balance) =>{
-        redeemed = balance
+async function getProducts() {
+    return new Promise((resolve,reject) => {
+        axios.get(productListURL,options)
+        .then(response =>{
+            const products = response.data
+            return resolve(products)
+        }).catch((error)=>{return reject(error)})
     })
 }
+
+async function campaignRemaining() {
+    return new Promise ((resolve,reject) =>{
+        balance.balanceOf(ownerAddress)
+        .then((reamainingOfCampaign) => {
+            const consumed = allocation - reamainingOfCampaign
+            return resolve([reamainingOfCampaign,consumed])
+        })
+        .catch((error) => {return reject(error)})
+    })
+}
+
 
 module.exports = router;
