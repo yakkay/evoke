@@ -66,7 +66,10 @@ function payToNextAgent(){
                     getMotrainUsers(motrainUsersPage1)   
             }
         }
-    }).catch((error) => console.log(error))
+    }).catch((error) => {
+        console.log(error)
+        payToNextAgent()
+    })
 }
 
 function checkUser(motrainUserID){
@@ -82,7 +85,8 @@ function checkUser(motrainUserID){
           console.log('Check User success')
           return resolve(userAccount.data)
       }).catch((error) => {
-          return reject(error)
+          console.log(error)
+          payToNextAgent()
         })
     })
 }

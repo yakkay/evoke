@@ -2,3 +2,5 @@ node_modules
 .dockerfile
 db1
 ganache
+credentials.js
+test.js
