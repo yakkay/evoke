@@ -127,7 +127,8 @@ async function transfer(agentAccount,agentCoins) {
                 }
             ).catch(error => console.log (error))
         }*/
-        else{
+        if(AgentBlockchainBalance > agentCoins){
+            console.log('Transfer status: Balance > coins')
             setTimeout(payToNextAgent,3000)
         }
     }).catch((error) => console.log(error))
