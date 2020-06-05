@@ -9,7 +9,7 @@ exports.transaction = function(web3,contract_address,sender_address,sender_priva
                 else{
                     const txObject = {
                         'nonce': web3.utils.toHex(txCount),
-                        'gasPrice': web3.utils.toHex(web3.utils.toWei('2','gwei')),
+                        'gasPrice': web3.utils.toHex(web3.utils.toWei('4','gwei')),
                         'gasLimit': web3.utils.toHex(800000),
                         'to': contract_address,
                         'value': web3.utils.toHex(web3.utils.toWei(value, 'ether')),
