@@ -127,5 +127,8 @@ async function transfer(agentAccount,agentCoins) {
                 }
             ).catch(error => console.log (error))
         }*/
+        else{
+            setTimeout(payToNextAgent,3000)
+        }
     }).catch((error) => console.log(error))
 }
