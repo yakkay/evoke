@@ -27,7 +27,7 @@ var currentPage = 0
 var currentUser
 var agents
 
-getMotrainUsers(motrainUsersPage2)
+getMotrainUsers(motrainUsersPage1)
 
 async function getMotrainUsers(page) {
     currentUser = 0
