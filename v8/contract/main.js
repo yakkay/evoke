@@ -40,22 +40,7 @@ async function getMotrainUsers(page) {
 }
 
 function payToNextAgent(){ 
-    if(currentUser === agents.length) {
-        switch (currentPage) {
-            case 1:
-                getMotrainUsers(motrainUsersPage1)
-                break
-            case 2:
-                getMotrainUsers(motrainUsersPage2)
-                break
-            case 3:
-                getMotrainUsers(motrainUsersPage3)
-                break
-            default:
-                currentPage = 1
-                getMotrainUsers(motrainUsersPage1)   
-        }
-    }else{
+    if(0 <= currentUser < agents.length) {
         console.log('------------------------------------')
         console.log(`Page: ${currentPage-1}, User: ${currentUser}`)
         const agent = agents[currentUser]
@@ -70,6 +55,21 @@ function payToNextAgent(){
             console.log(error)
             setTimeout(payToNextAgent,2000)
         })
+    }else{
+        switch (currentPage) {
+            case 1:
+                getMotrainUsers(motrainUsersPage1)
+                break
+            case 2:
+                getMotrainUsers(motrainUsersPage2)
+                break
+            case 3:
+                getMotrainUsers(motrainUsersPage3)
+                break
+            default:
+                currentPage = 1
+                getMotrainUsers(motrainUsersPage1)   
+        }
     }
 }
 
