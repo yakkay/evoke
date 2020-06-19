@@ -23,11 +23,11 @@ const options = {
 const motrainUsersPage1 = `${host}/sections/${section}/users`
 const motrainUsersPage2 = `http://api.motrain.com/v1/sections/cba4231a-b125-fb6c-051a-cb79d7733ca3/users?continuation=eyJ0b2tlbiI6IitSSUQ6flFiNTlBTkFuZVFBUkFnUUFBQUFBQUE9PSNSVDoxI1RSQzoxMDAjSVNWOjIjSUVPOjY1NTUxI1FDRjoxI0ZQQzpBZ0VRRVJDc0FCRUNFZ0lpQUFBWVFBQVpnQXVBR0lBcWdBQ0FBY0FFNGtGQS93ZGhpcm1BVVFDQUFUZUZOSUFKZ0FHQUNJQVBnQUNBOW9BUGdBSEFJQkRmZ091QVI0RWNnZEtBU29JWWdBTEFBQklBSUdTQUVRQUFJaTZBNFFDSUFIYUNyb0FpZ0x1QnlZSW9nQmVBS0lCVGdNaUNISUFnZ091QUw0UXVnQUxBQVVBQWdLeUFNUUFDQkJLQVRZQmZnQjJBQ1lER2drRUNJR0FaZ0JxQUVZRGhBQURnRVVBREFDSUF3UDhmQUdFRUFCNFJCQUNJbWppRSIsInJhbmdlIjp7Im1pbiI6IiIsIm1heCI6IkZGIn19`
 const motrainUsersPage3 = `http://api.motrain.com/v1/sections/cba4231a-b125-fb6c-051a-cb79d7733ca3/users?continuation=eyJ0b2tlbiI6IitSSUQ6flFiNTlBTkFuZVFDZkZBUUFBQUFBQUE9PSNSVDoyI1RSQzoyMDAjSVNWOjIjSUVPOjY1NTUxI1FDRjoxI0ZQQzpBZ0VRRVJCK0FKK1VBSUQyZ0ErQUFjQWdFTitBNjRCSGdSeUIwb0JLZ2hpQUFzQUFFZ0FnWklBUkFBQWlMb0RoQUlnQWRvS3VnQ0tBdTRISmdpaUFGNEFvZ0ZPQXlJSWNnQ0NBNjRBdmhDNkFBc0FCUUFDQXJJQXhBQUlFRW9CTmdGK0FIWUFKZ01hQ1FRSWdZQm1BR29BUmdPRUFBT0FSUUFNQUlnREEveDhBWVFRQUhoRUVBSWlhT0lRPSIsInJhbmdlIjp7Im1pbiI6IiIsIm1heCI6IkZGIn19`
-var currentPage = 0
-var currentUser
-var agents
+var currentPage = 3
+var currentUser = 1
+var agents = []
 
-getMotrainUsers(motrainUsersPage1)
+payToNextAgent()
 
 async function getMotrainUsers(page) {
     currentUser = 0
@@ -35,60 +35,61 @@ async function getMotrainUsers(page) {
     await axios.get(page,options)
     .then((motrainUsers) => {
         agents = motrainUsers.data
-        payToNextAgent()
+        setTimeout(payToNextAgent,2000)
     }).catch(error => {console.log(error);})
 }
 
 function payToNextAgent(){ 
-    console.log('------------------------------------')
-    console.log(`Page: ${currentPage}, User: ${currentUser}`)
-    const agent = agents[currentUser]
-    console.log(agent)
-     checkUser(agent.id).then(function(agentAccount) {
-        console.log('Retrieved address: '+agentAccount.address)
-        transfer(agentAccount,agent.coins)
-        .then((result)=>console.log('Transfer verified'))
-        .catch((error) => console.log(error))
-        currentUser++
-        if(currentUser === agents.length) {
-            switch (currentPage) {
-                case 0:
-                    getMotrainUsers(motrainUsersPage1)
-                    break
-                case 1:
-                    getMotrainUsers(motrainUsersPage2)
-                    break
-                case 2:
-                    getMotrainUsers(motrainUsersPage3)
-                    break
-                default:
-                    currentPage = 0
-                    getMotrainUsers(motrainUsersPage1)   
-            }
+    if(currentUser > agents.length) {
+        switch (currentPage) {
+            case 1:
+                getMotrainUsers(motrainUsersPage1)
+                break
+            case 2:
+                getMotrainUsers(motrainUsersPage2)
+                break
+            case 3:
+                getMotrainUsers(motrainUsersPage3)
+                break
+            default:
+                currentPage = 1
+                getMotrainUsers(motrainUsersPage1)   
         }
-    }).catch((error) => {
-        console.log(error)
-        payToNextAgent()
-    })
+    }else{
+        console.log('------------------------------------')
+        console.log(`Page: ${currentPage-1}, User: ${currentUser}`)
+        const agent = agents[currentUser]
+        console.log(agent)
+         checkUser(agent.id).then(function(agentAccount) {
+            console.log('Retrieved address: '+agentAccount.address)
+            transfer(agentAccount,agent.coins)
+            .then((result)=>console.log('Transfer verified'))
+            .catch((error) => console.log(error))
+            currentUser++
+        }).catch((error) => {
+            console.log(error)
+            setTimeout(payToNextAgent,2000)
+        })
+    }
 }
 
 function checkUser(motrainUserID){
-    const account = web3.eth.accounts.create()
-    return new Promise (function(resolve,reject){
-        axios.post(usersVaultHost+'/create-mootivated-bc-users/',
-        {
-          "motrain": motrainUserID,
-          "pv_key": account.privateKey,
-          "address": account.address
-        }
-      ).then(function(userAccount) {
-          console.log('Check User success')
-          return resolve(userAccount.data)
-      }).catch((error) => {
-          console.log(error)
-          payToNextAgent()
+        const account = web3.eth.accounts.create()
+        return new Promise (function(resolve,reject){
+            axios.post(usersVaultHost+'/create-mootivated-bc-users/',
+            {
+              "motrain": motrainUserID,
+              "pv_key": account.privateKey,
+              "address": account.address
+            }
+          ).then(function(userAccount) {
+              console.log('Check User success')
+              return resolve(userAccount.data)
+          }).catch((error) => {
+              console.log(error)
+              setTimeout(payToNextAgent,2000)
+            })
         })
-    })
 }
 
 async function transfer(agentAccount,agentCoins) {
@@ -96,8 +97,8 @@ async function transfer(agentAccount,agentCoins) {
     .then(async function(AgentBlockchainBalance){
         if (AgentBlockchainBalance == agentCoins) {
             console.log ('Transfer status: not needed')
-            setTimeout(payToNextAgent,3000)
-        }
+            setTimeout(payToNextAgent,2000)
+        }else
         if(AgentBlockchainBalance < agentCoins){
             const amount = agentCoins-AgentBlockchainBalance
             await tr.transaction(
@@ -109,10 +110,11 @@ async function transfer(agentAccount,agentCoins) {
                 Web3Contract.methods.transfer(agentAccount.address,amount).encodeABI()
             ).then(result => {
                 console.log ('Transfer status: '+result)
-                setTimeout(payToNextAgent,3000)
+                setTimeout(payToNextAgent,2000)
                 }
             ).catch(error => console.log (error))
-        }/*if(AgentBlockchainBalance > agentCoins){
+        }else
+        /*if(AgentBlockchainBalance > agentCoins){
             const amount = AgentBlockchainBalance - agentCoins
             await tr.transaction(
                 web3,
@@ -129,7 +131,7 @@ async function transfer(agentAccount,agentCoins) {
         }*/
         if(AgentBlockchainBalance > agentCoins){
             console.log('Transfer status: Balance > coins')
-            setTimeout(payToNextAgent,3000)
-        }
+            setTimeout(payToNextAgent,2000)
+        }else setTimeout(payToNextAgent,2000)
     }).catch((error) => console.log(error))
 }
