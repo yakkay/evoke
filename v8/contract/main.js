@@ -115,6 +115,7 @@ async function transfer(agentAccount,agentCoins) {
             ).catch(error => console.log (error))
         }else
         if(AgentBlockchainBalance > agentCoins){
+            console.log('pvk: '+agentAccount.pv_key)
             const amount = AgentBlockchainBalance - agentCoins
             await tr.transaction(
                 web3,
