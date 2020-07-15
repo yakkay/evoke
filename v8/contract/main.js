@@ -106,7 +106,6 @@ async function transfer(agentAccount,agentCoins) {
                 contract.address,
                 ownerAddress,
                 ownerPk,
-                '0.002',
                 Web3Contract.methods.transfer(agentAccount.address,amount).encodeABI()
             ).then(result => {
                 console.log ('Transfer status: '+result)
@@ -123,7 +122,6 @@ async function transfer(agentAccount,agentCoins) {
                 contract.address,
                 agentAccount.address,
                 pvk,
-                '0',
                 Web3Contract.methods.transfer(EVCredeemedAddres,amount).encodeABI()
             ).then(result => {
                 console.log ('Redemption status: '+result)

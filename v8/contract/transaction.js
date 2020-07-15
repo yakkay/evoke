@@ -1,6 +1,6 @@
 const Tx = require('ethereumjs-tx')
 
-exports.transaction = function(web3,contract_address,sender_address,sender_privatekey,value,method){ 
+exports.transaction = function(web3,contract_address,sender_address,sender_privatekey,method){ 
         return new Promise (function(resolve,reject){
             console.log('sender address: '+sender_address)
             web3.eth.getTransactionCount(sender_address,function(error,txCount){
