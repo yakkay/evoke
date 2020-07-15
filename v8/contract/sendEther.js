@@ -1,6 +1,6 @@
 const Tx = require('ethereumjs-tx')
 
-exports.transaction = function(web3,contract_address,sender_address,sender_privatekey,value,method){ 
+exports.transaction = function(web3,receiverAccount,sender_address,sender_privatekey,value){ 
         return new Promise (function(resolve,reject){
             console.log('sender address: '+sender_address)
             web3.eth.getTransactionCount(sender_address,function(error,txCount){
@@ -11,8 +11,8 @@ exports.transaction = function(web3,contract_address,sender_address,sender_priva
                         'nonce': web3.utils.toHex(txCount),
                         'gasPrice': web3.utils.toHex(web3.utils.toWei('4','gwei')),
                         'gasLimit': web3.utils.toHex(800000),
-                        'to': contract_address,
-                        data: method
+                        'to': receiverAccount,
+                        'value': web3.utils.toHex(web3.utils.toWei(value, 'ether')),
                     }
                     const tx = new Tx(txObject)
                     tx.sign(Buffer.from(sender_privatekey,'hex'))
